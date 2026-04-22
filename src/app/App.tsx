@@ -809,6 +809,7 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [tarefasInitialView, setTarefasInitialView] = useState<TarefasViewTab | undefined>(undefined);
   const [tarefasInitialFilter, setTarefasInitialFilter] = useState<TarefasFilter | undefined>(undefined);
+  const [apontarInitialFilters, setApontarInitialFilters] = useState<{ cliente?: string; tarefaId?: number; responsavel?: string } | undefined>(undefined);
   const [innerView, setInnerView] = useState<string | null>(null);
 
   // Close sidebar on resize to desktop
@@ -822,6 +823,11 @@ export default function App() {
     setTarefasInitialView(viewTab);
     setTarefasInitialFilter(filter);
     setActiveTab('tarefas');
+  }
+
+  function handleNavigateApontar(filters?: { cliente?: string; tarefaId?: number; responsavel?: string }) {
+    setApontarInitialFilters(filters);
+    setActiveTab('apontar');
   }
 
   return (
@@ -904,9 +910,9 @@ export default function App() {
               ) : activeTab === 'visao-geral' ? (
                 <VisaoGeral onNavigateTarefas={handleNavigateTarefas} />
               ) : activeTab === 'tarefas' ? (
-                <Tarefas initialView={tarefasInitialView} initialFilter={tarefasInitialFilter} />
+                <Tarefas initialView={tarefasInitialView} initialFilter={tarefasInitialFilter} onNavigateApontar={handleNavigateApontar} />
               ) : activeTab === 'apontar' ? (
-                <Apontar />
+                <Apontar initialFilters={apontarInitialFilters} />
               ) : activeTab === 'auditoria' ? (
                 <Auditoria />
               ) : activeTab === 'circular' ? (

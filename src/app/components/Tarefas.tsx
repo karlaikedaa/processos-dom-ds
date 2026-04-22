@@ -246,7 +246,15 @@ function StatusBadge({ status }: { status: KanbanStatus }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export function Tarefas() {
+export function Tarefas({
+  initialView,
+  initialFilter,
+  onNavigateApontar
+}: {
+  initialView?: any;
+  initialFilter?: any;
+  onNavigateApontar?: (filters: { cliente?: string; tarefaId?: number; responsavel?: string }) => void;
+} = {}) {
   const [selectedTask, setSelectedTask] = useState<Tarefa | null>(mockTarefas[0]);
   const [activeTab, setActiveTab] = useState<string>('informacoes');
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({
@@ -689,12 +697,13 @@ export function Tarefas() {
                     background: 'white',
                   }}
                   onClick={() => {
-                    // TODO: Navigate to Apontar tab with filters pre-applied
-                    console.log('Navigate to Apontar with filters:', {
-                      cliente: selectedTask.empresa,
-                      tarefa: selectedTask.nome,
-                      responsavel: selectedTask.responsavel
-                    });
+                    if (onNavigateApontar && selectedTask) {
+                      onNavigateApontar({
+                        cliente: selectedTask.empresa,
+                        tarefaId: selectedTask.id,
+                        responsavel: selectedTask.responsavel
+                      });
+                    }
                   }}
                 >
                   Ver Apontamentos

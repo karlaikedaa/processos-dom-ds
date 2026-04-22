@@ -51,6 +51,24 @@ export function FloatingTimer() {
     };
   }, [isDragging, dragOffset, isMinimized, updateTimerPosition]);
 
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Space: pause/resume (only if timer exists and focus is not on input)
+      if (e.code === 'Space' && e.target === document.body && timerState) {
+        e.preventDefault();
+        if (timerState.rodando) {
+          pauseTimer();
+        } else {
+          resumeTimer();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [timerState, pauseTimer, resumeTimer]);
+
   // Não renderizar se não há timer ativo
   if (!timerState) return null;
 
@@ -83,7 +101,7 @@ export function FloatingTimer() {
           zIndex: 9999,
           cursor: isDragging ? 'grabbing' : 'grab'
         }}
-        className="bg-card border-2 border-primary rounded-lg shadow-2xl p-3 flex items-center gap-2 animate-in fade-in duration-200"
+        className="bg-card border-2 border-primary rounded-lg shadow-2xl p-3 flex items-center gap-2 animate-in zoom-in-95 fade-in duration-200"
       >
         <div className="text-2xl font-mono font-bold text-primary">
           {tempoFormatado}
@@ -110,7 +128,7 @@ export function FloatingTimer() {
         cursor: isDragging ? 'grabbing' : 'grab',
         opacity: timerState.rodando ? 1 : 0.9
       }}
-      className="bg-card border-2 border-primary rounded-lg shadow-2xl w-80 animate-in fade-in duration-200"
+      className="bg-card border-2 border-primary rounded-lg shadow-2xl w-80 animate-in fade-in slide-in-from-bottom-4 duration-300"
     >
       {/* Header com título e fechar */}
       <div className="flex items-start justify-between p-3 border-b">

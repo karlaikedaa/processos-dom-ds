@@ -10,13 +10,19 @@ import { colors } from '../../design-tokens';
 
 const NOOP = () => {};
 
-export function Apontar() {
+export interface ApontarInitialFilters {
+  cliente?: string;
+  tarefaId?: number;
+  responsavel?: string;
+}
+
+export function Apontar({ initialFilters }: { initialFilters?: ApontarInitialFilters } = {}) {
   const { timesheetRows, entries, getTotalPorDia, updateTimeEntry } = useTimer();
 
   const [weekOffset, setWeekOffset] = useState(0);
-  const [clienteFiltro, setClienteFiltro] = useState<string | null>(null);
-  const [tarefaFiltro, setTarefaFiltro] = useState<number | null>(null);
-  const [responsavelFiltro, setResponsavelFiltro] = useState<string | null>(null);
+  const [clienteFiltro, setClienteFiltro] = useState<string | null>(initialFilters?.cliente || null);
+  const [tarefaFiltro, setTarefaFiltro] = useState<number | null>(initialFilters?.tarefaId || null);
+  const [responsavelFiltro, setResponsavelFiltro] = useState<string | null>(initialFilters?.responsavel || null);
 
   const week = useMemo(() => getWeek(weekOffset), [weekOffset]);
   const weekDates = useMemo(() => week.dias.map(d => format(d, 'yyyy-MM-dd')), [week]);

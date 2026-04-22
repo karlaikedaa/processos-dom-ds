@@ -163,7 +163,10 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
       pausadoEm: undefined,
       tempoAcumulado: 0,
       rodando: true,
-      posicao: { x: window.innerWidth - 350, y: window.innerHeight - 180 } // Bottom-right
+      posicao: {
+        x: window.innerWidth < 768 ? 10 : window.innerWidth - 350,
+        y: window.innerWidth < 768 ? 10 : window.innerHeight - 180
+      } // Bottom-right on desktop, top-left on mobile
     });
     setTempoAtual(0);
     setIsMinimized(false);
