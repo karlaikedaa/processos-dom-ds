@@ -91,6 +91,53 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
     });
   }, [timerState]);
 
+  // Time entry management functions (MUST come before stopTimer)
+  const updateTimeEntry = useCallback((tarefaId: number, data: string, novaDuracao: string) => {
+    setEntries(prev => prev.map(e => {
+      if (e.tarefaId === tarefaId && e.data === data) {
+        return {
+          ...e,
+          duracao: novaDuracao,
+          duracaoSegundos: parseDuration(novaDuracao)
+        };
+      }
+      return e;
+    }));
+  }, []);
+
+  const addTimeEntry = useCallback((
+    tarefaId: number,
+    data: string,
+    duracao: string,
+    metadata: { tarefaNome: string; clienteNome: string; responsavel: string }
+  ) => {
+    const existing = entries.find(e =>
+      e.tarefaId === tarefaId && e.data === data
+    );
+
+    if (existing) {
+      // Somar com o existente
+      const novoTotal = addDurations(existing.duracao, duracao);
+      updateTimeEntry(tarefaId, data, novoTotal);
+    } else {
+      // Criar novo entry
+      const newEntry: TimeEntry = {
+        id: `e${Date.now()}`,
+        tarefaId,
+        tarefaNome: metadata.tarefaNome,
+        clienteNome: metadata.clienteNome,
+        responsavel: metadata.responsavel,
+        data,
+        duracao,
+        duracaoSegundos: parseDuration(duracao),
+        origem: 'timer' as const
+      };
+
+      setEntries(prev => [...prev, newEntry]);
+    }
+  }, [entries, updateTimeEntry]);
+
+  // Timer control functions
   const startTimer = useCallback((tarefa: { id: number; nome: string; cliente: string; responsavel: string }) => {
     // Verificar se já existe timer ativo
     if (timerState && timerState.tarefaId !== tarefa.id) {
@@ -166,52 +213,6 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
   const toggleMinimized = useCallback(() => {
     setIsMinimized(prev => !prev);
   }, []);
-
-  // Time entry management functions
-  const updateTimeEntry = useCallback((tarefaId: number, data: string, novaDuracao: string) => {
-    setEntries(prev => prev.map(e => {
-      if (e.tarefaId === tarefaId && e.data === data) {
-        return {
-          ...e,
-          duracao: novaDuracao,
-          duracaoSegundos: parseDuration(novaDuracao)
-        };
-      }
-      return e;
-    }));
-  }, []);
-
-  const addTimeEntry = useCallback((
-    tarefaId: number,
-    data: string,
-    duracao: string,
-    metadata: { tarefaNome: string; clienteNome: string; responsavel: string }
-  ) => {
-    const existing = entries.find(e =>
-      e.tarefaId === tarefaId && e.data === data
-    );
-
-    if (existing) {
-      // Somar com o existente
-      const novoTotal = addDurations(existing.duracao, duracao);
-      updateTimeEntry(tarefaId, data, novoTotal);
-    } else {
-      // Criar novo entry
-      const newEntry: TimeEntry = {
-        id: `e${Date.now()}`,
-        tarefaId,
-        tarefaNome: metadata.tarefaNome,
-        clienteNome: metadata.clienteNome,
-        responsavel: metadata.responsavel,
-        data,
-        duracao,
-        duracaoSegundos: parseDuration(duracao),
-        origem: 'timer' as const
-      };
-
-      setEntries(prev => [...prev, newEntry]);
-    }
-  }, [entries, updateTimeEntry]);
 
   // Query functions
   const getTotalPorDia = useCallback((data: string): string => {

@@ -74,7 +74,8 @@
       "Bash(curl -s http://localhost:5173/)",
       "Bash(npx vite:*)",
       "Bash(gh auth:*)",
-      "Bash(gh repo:*)"
+      "Bash(gh repo:*)",
+      "Bash(npx vercel:*)"
     ]
   }
 }
