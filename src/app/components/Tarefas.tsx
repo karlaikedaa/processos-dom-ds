@@ -618,7 +618,10 @@ export function Tarefas() {
                         >
                           #{task.numero}
                         </span>
-                        <StatusBadge status={task.status} />
+                        <div className="flex items-center gap-2">
+                          <TimerButton tarefa={task} />
+                          <StatusBadge status={task.status} />
+                        </div>
                       </div>
                       <div className="flex items-center gap-2 mb-1">
                         <Building2 size={12} style={{ color: 'var(--muted-foreground)' }} />
