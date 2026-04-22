@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { colors } from '../../../design-tokens';
-import { Building2, Calendar as CalendarIcon, User, X } from 'lucide-react';
+import { Building2, Calendar as CalendarIcon, User, X, Play, Square } from 'lucide-react';
+import { useTimer } from '../../contexts/TimerContext';
+import { formatDuration } from '../../utils/time';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -100,6 +102,48 @@ const mockKanbanData: Record<KanbanStatus, KanbanCard[]> = {
 
 // ─── Components ───────────────────────────────────────────────────────────────
 
+// TimerButton component for Kanban cards
+function TimerButton({ card }: { card: KanbanCard }) {
+  const { timerState, tempoAtual, startTimer, stopTimer } = useTimer();
+  const isThisTimerRunning = timerState?.tarefaId?.toString() === card.id;
+  const tempoExibir = isThisTimerRunning ? formatDuration(tempoAtual) : '00:00:00';
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+
+    if (isThisTimerRunning) {
+      stopTimer();
+    } else {
+      startTimer({
+        id: parseInt(card.id.replace('T-', '')),
+        nome: card.nomeTarefa,
+        cliente: card.empresas[0]?.nome || 'Sem cliente',
+        responsavel: card.responsavel
+      });
+    }
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      className={`
+        flex items-center gap-2 px-2 py-1 rounded text-xs transition-colors
+        ${isThisTimerRunning
+          ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+          : 'bg-muted hover:bg-muted/80'
+        }
+      `}
+    >
+      <span className="font-mono text-xs">{tempoExibir}</span>
+      {isThisTimerRunning ? (
+        <Square size={12} fill="currentColor" />
+      ) : (
+        <Play size={12} />
+      )}
+    </button>
+  );
+}
+
 export function KanbanView() {
   const [selectedCard, setSelectedCard] = useState<KanbanCard | null>(null);
 
@@ -142,7 +186,10 @@ export function KanbanView() {
                     className="bg-white rounded-lg p-4 border cursor-pointer hover:shadow-md transition-shadow"
                     style={{ borderColor: 'var(--border)' }}
                   >
-                    <h4 className="font-semibold text-sm mb-3">{card.nomeTarefa}</h4>
+                    <div className="flex items-start justify-between mb-3 gap-2">
+                      <h4 className="font-semibold text-sm flex-1">{card.nomeTarefa}</h4>
+                      <TimerButton card={card} />
+                    </div>
 
                     <div className="space-y-2 text-xs text-gray-600">
                       <div className="flex items-center gap-2">

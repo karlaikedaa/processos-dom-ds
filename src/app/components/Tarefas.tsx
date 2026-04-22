@@ -680,6 +680,25 @@ export function Tarefas() {
                     </span>
                   </div>
                 </div>
+                <button
+                  className="px-4 py-2 rounded-md transition-colors"
+                  style={{
+                    fontSize: 'var(--text-label)',
+                    color: 'var(--primary)',
+                    border: '1px solid var(--primary)',
+                    background: 'white',
+                  }}
+                  onClick={() => {
+                    // TODO: Navigate to Apontar tab with filters pre-applied
+                    console.log('Navigate to Apontar with filters:', {
+                      cliente: selectedTask.empresa,
+                      tarefa: selectedTask.nome,
+                      responsavel: selectedTask.responsavel
+                    });
+                  }}
+                >
+                  Ver Apontamentos
+                </button>
               </div>
             </div>
 
