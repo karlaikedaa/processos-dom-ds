@@ -3,7 +3,7 @@ import { colors } from '../../design-tokens';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './ui/collapsible';
 import {
   Search, Plus, Filter, Download, MoreHorizontal,
-  ChevronDown, ChevronUp, ChevronRight, Calendar, User, Building2,
+  ChevronDown, ChevronUp, ChevronRight, ChevronLeft, Calendar, User, Building2,
   FileText, Mail, Users, Hash, Clock, AlertTriangle,
   CheckCircle2, Loader2, Upload, Paperclip, Check,
   Activity, MessageSquare, Bell, RefreshCw,
@@ -16,6 +16,7 @@ import { MultiSelectFilter } from './ui/multi-select-filter';
 import { KanbanView } from './views/KanbanView';
 import { CalendarioView } from './views/CalendarioView';
 import { FluxoView } from './views/FluxoView';
+import { Apontar, ApontarInitialFilters } from './Apontar';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -271,6 +272,10 @@ export function Tarefas({
   const [atividadesOpen, setAtividadesOpen] = useState(false);
   const [checklistOpen, setChecklistOpen] = useState(false);
 
+  // Navigation state for Apontar screen
+  const [showApontar, setShowApontar] = useState(false);
+  const [apontarFilters, setApontarFilters] = useState<ApontarInitialFilters | undefined>(undefined);
+
   // Mock data for filters
   const mockEmpresas = [
     { id: 1, codigo: '002', apelido: 'NexGen', nome: 'NexGen Soluções' },
@@ -317,6 +322,36 @@ export function Tarefas({
   const toggleGroup = (nome: string) => {
     setExpandedGroups((prev) => ({ ...prev, [nome]: !prev[nome] }));
   };
+
+  // If showing Apontar screen, render it with breadcrumb
+  if (showApontar) {
+    return (
+      <div className="flex flex-col min-h-screen" style={{ background: colors.elements['background 02'] }}>
+        {/* Breadcrumb */}
+        <div className="px-6 pt-6 pb-4">
+          <div className="flex items-center gap-2 mb-4">
+            <button
+              onClick={() => setShowApontar(false)}
+              className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+              style={{ fontSize: 'var(--text-label)' }}
+            >
+              <ChevronLeft size={16} />
+              Tarefas
+            </button>
+            <ChevronRight size={16} className="text-muted-foreground" />
+            <span style={{ fontSize: 'var(--text-label)', color: 'var(--foreground)', fontWeight: 'var(--font-weight-semibold)' }}>
+              Apontar
+            </span>
+          </div>
+        </div>
+
+        {/* Apontar Component */}
+        <div className="flex-1">
+          <Apontar initialFilters={apontarFilters} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen" style={{ background: colors.elements['background 02'] }}>
@@ -648,8 +683,14 @@ export function Tarefas({
                     background: 'white',
                   }}
                   onClick={() => {
-                    // TODO: Open timesheet modal with filters
-                    console.log('Open timesheet modal for task:', selectedTask?.id);
+                    if (selectedTask) {
+                      setApontarFilters({
+                        cliente: selectedTask.empresa,
+                        tarefaId: selectedTask.id,
+                        responsavel: selectedTask.responsavel
+                      });
+                      setShowApontar(true);
+                    }
                   }}
                 >
                   Ver Apontamentos
