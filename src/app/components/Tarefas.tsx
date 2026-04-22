@@ -8,10 +8,8 @@ import {
   CheckCircle2, Loader2, Upload, Paperclip, Check,
   Activity, MessageSquare, Bell, RefreshCw,
   CheckSquare, PauseCircle, Ban, Send, Trash2, Eye,
-  LayoutGrid, List, ArrowRight, Play, Square,
+  LayoutGrid, List, ArrowRight,
 } from 'lucide-react';
-import { useTimer } from '../contexts/TimerContext';
-import { formatDuration } from '../utils/time';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
 import { Input } from './ui/input';
 import { MultiSelectFilter } from './ui/multi-select-filter';
@@ -248,12 +246,10 @@ function StatusBadge({ status }: { status: KanbanStatus }) {
 
 export function Tarefas({
   initialView,
-  initialFilter,
-  onNavigateApontar
+  initialFilter
 }: {
   initialView?: any;
   initialFilter?: any;
-  onNavigateApontar?: (filters: { cliente?: string; tarefaId?: number; responsavel?: string }) => void;
 } = {}) {
   const [selectedTask, setSelectedTask] = useState<Tarefa | null>(mockTarefas[0]);
   const [activeTab, setActiveTab] = useState<string>('informacoes');
@@ -274,9 +270,6 @@ export function Tarefas({
   const [documentosOpen, setDocumentosOpen] = useState(false);
   const [atividadesOpen, setAtividadesOpen] = useState(false);
   const [checklistOpen, setChecklistOpen] = useState(false);
-
-  // Timer hook for timesheet integration
-  const { timerState, tempoAtual, startTimer, stopTimer } = useTimer();
 
   // Mock data for filters
   const mockEmpresas = [
@@ -323,47 +316,6 @@ export function Tarefas({
 
   const toggleGroup = (nome: string) => {
     setExpandedGroups((prev) => ({ ...prev, [nome]: !prev[nome] }));
-  };
-
-  // Subcomponente: TimerButton por tarefa
-  const TimerButton = ({ tarefa }: { tarefa: any }) => {
-    const isThisTimerRunning = timerState?.tarefaId === tarefa.id;
-    const tempoExibir = isThisTimerRunning ? formatDuration(tempoAtual) : '00:00:00';
-
-    const handleClick = () => {
-      if (isThisTimerRunning) {
-        // Parar timer
-        stopTimer();
-      } else {
-        // Iniciar timer
-        startTimer({
-          id: tarefa.id,
-          nome: tarefa.nome,
-          cliente: tarefa.empresa,
-          responsavel: tarefa.responsavel
-        });
-      }
-    };
-
-    return (
-      <button
-        onClick={handleClick}
-        className={`
-          flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-colors
-          ${isThisTimerRunning
-            ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-            : 'bg-muted hover:bg-muted/80'
-          }
-        `}
-      >
-        <span className="font-mono text-xs">{tempoExibir}</span>
-        {isThisTimerRunning ? (
-          <Square size={14} fill="currentColor" />
-        ) : (
-          <Play size={14} />
-        )}
-      </button>
-    );
   };
 
   return (
@@ -627,7 +579,6 @@ export function Tarefas({
                           #{task.numero}
                         </span>
                         <div className="flex items-center gap-2">
-                          <TimerButton tarefa={task} />
                           <StatusBadge status={task.status} />
                         </div>
                       </div>
@@ -697,13 +648,8 @@ export function Tarefas({
                     background: 'white',
                   }}
                   onClick={() => {
-                    if (onNavigateApontar && selectedTask) {
-                      onNavigateApontar({
-                        cliente: selectedTask.empresa,
-                        tarefaId: selectedTask.id,
-                        responsavel: selectedTask.responsavel
-                      });
-                    }
+                    // TODO: Open timesheet modal with filters
+                    console.log('Open timesheet modal for task:', selectedTask?.id);
                   }}
                 >
                   Ver Apontamentos

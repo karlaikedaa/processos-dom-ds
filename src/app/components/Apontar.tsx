@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Clock, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { useTimer } from '../contexts/TimerContext';
 import { getWeek, formatDayHeader, formatWeekRange, parseDuration, formatDuration } from '../utils/time';
 import { TimeInput } from './ui/time-input';
@@ -382,7 +383,7 @@ export function Apontar({ initialFilters }: { initialFilters?: ApontarInitialFil
                     minWidth: '100px'
                   }}>
                     <div style={{ fontSize: '12px', color: '#666', marginBottom: '2px' }}>
-                      {format(dia, 'EEE', { locale: require('date-fns/locale/pt-BR') }).toUpperCase()}
+                      {format(dia, 'EEE', { locale: ptBR }).toUpperCase()}
                     </div>
                     <div>{formatDayHeader(dia)}</div>
                   </th>
