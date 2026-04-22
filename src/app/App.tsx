@@ -23,6 +23,7 @@ import { TemplatesEmailWhatsapp } from './components/TemplatesEmailWhatsapp';
 import { ModelosDocumento } from './components/ModelosDocumento';
 import { GerenciarTarefas } from './components/GerenciarTarefas';
 import { GeradorTarefas } from './components/GeradorTarefas';
+import { Apontar } from './components/Apontar';
 import { TimerProvider } from './contexts/TimerContext';
 import { FloatingTimer } from './components/FloatingTimer';
 
@@ -31,6 +32,7 @@ import { FloatingTimer } from './components/FloatingTimer';
 type ActiveTab =
   | 'visao-geral'
   | 'tarefas'
+  | 'apontar'
   | 'documentos-express'
   | 'circular'
   | 'status-integracao'
@@ -43,6 +45,7 @@ type ActiveTab =
 const tabs: { id: ActiveTab; label: string }[] = [
   { id: 'visao-geral', label: 'Visão geral' },
   { id: 'tarefas', label: 'Tarefas' },
+  { id: 'apontar', label: 'Apontar' },
   { id: 'documentos-express', label: 'Documentos Express' },
   { id: 'circular', label: 'Circular' },
   { id: 'status-integracao', label: 'Status de integração' },
@@ -902,6 +905,8 @@ export default function App() {
                 <VisaoGeral onNavigateTarefas={handleNavigateTarefas} />
               ) : activeTab === 'tarefas' ? (
                 <Tarefas initialView={tarefasInitialView} initialFilter={tarefasInitialFilter} />
+              ) : activeTab === 'apontar' ? (
+                <Apontar />
               ) : activeTab === 'auditoria' ? (
                 <Auditoria />
               ) : activeTab === 'circular' ? (
