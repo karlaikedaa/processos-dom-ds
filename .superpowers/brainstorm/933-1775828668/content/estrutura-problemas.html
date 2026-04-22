@@ -1,0 +1,76 @@
+<h2>Problemas na tela de Tarefas</h2>
+<p class="subtitle">Identifique quais problemas você quer corrigir</p>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="duplicated-buttons" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Botões duplicados</h3>
+      <p>Os botões "Exportar Excel" e "Filtros Avançados" aparecem 2 vezes: uma dentro do header das abas e outra fora (abaixo do header)</p>
+      <div style="margin-top: 12px; padding: 12px; background: rgba(220,10,10,0.08); border-radius: 4px; font-size: 13px;">
+        <strong>Correção:</strong> Remover os botões duplicados que aparecem fora do header
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="dropdown-arrows" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Dropdowns sem seta visível</h3>
+      <p>Os campos de filtro (Empresa, Responsável, Tarefa, Fluxo) são &lt;select&gt; nativos mas não mostram o ícone ChevronDown</p>
+      <div style="margin-top: 12px; padding: 12px; background: rgba(220,10,10,0.08); border-radius: 4px; font-size: 13px;">
+        <strong>Correção:</strong> Adicionar ícone ChevronDown visível nos selects usando CSS ou componente custom
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="tab-styles" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Estilo das abas</h3>
+      <p>As abas (Kanban, Lista, Calendário, Fluxo) precisam de melhor visual: tamanho dos ícones, espaçamento, border-radius</p>
+      <div style="margin-top: 12px; padding: 12px; background: rgba(220,10,10,0.08); border-radius: 4px; font-size: 13px;">
+        <strong>Correção:</strong> Ajustar padding, font-size, border-radius e espaçamento conforme spec
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="background-structure" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <h3>Background cinza e estrutura de blocos</h3>
+      <p>O background cinza (#f6f6f6) deve ser da página inteira. Os 3 blocos brancos devem ser cards separados dentro dele. O conteúdo das abas deve estar DENTRO do terceiro bloco branco.</p>
+      <div style="margin-top: 12px; padding: 12px; background: rgba(220,10,10,0.08); border-radius: 4px; font-size: 13px;">
+        <strong>Correção:</strong> Reorganizar estrutura: página cinza → 3 blocos brancos separados → conteúdo dentro do 3º bloco
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="filter-spacing" onclick="toggleSelect(this)">
+    <div class="letter">E</div>
+    <div class="content">
+      <h3>Espaçamento dos filtros</h3>
+      <p>Os filtros (busca + dropdowns) precisam de melhor padding e gaps entre elementos</p>
+      <div style="margin-top: 12px; padding: 12px; background: rgba(220,10,10,0.08); border-radius: 4px; font-size: 13px;">
+        <strong>Correção:</strong> Ajustar padding do bloco (24px) e gap entre elementos conforme spec
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="button-positions" onclick="toggleSelect(this)">
+    <div class="letter">F</div>
+    <div class="content">
+      <h3>Posição dos botões do topo</h3>
+      <p>Botões "Apontar" e "Nova tarefa" precisam de melhor alinhamento e espaçamento</p>
+      <div style="margin-top: 12px; padding: 12px; background: rgba(220,10,10,0.08); border-radius: 4px; font-size: 13px;">
+        <strong>Correção:</strong> Ajustar gap entre botões e padding interno
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 32px; padding: 16px; background: #f6f6f6; border-radius: 8px;">
+  <p style="font-size: 13px; color: #666; margin: 0;">
+    <strong>Instrução:</strong> Selecione todos os problemas que você quer corrigir (pode selecionar múltiplos). Depois me confirme no terminal.
+  </p>
+</div>

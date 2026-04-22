@@ -1,0 +1,186 @@
+<h2>Estrutura atual da tela de Tarefas vs. Especificação</h2>
+<p class="subtitle">Comparando a implementação atual com as especificações do Figma</p>
+
+<div class="split" style="gap: 24px; margin-bottom: 40px;">
+  <div style="flex: 1;">
+    <h3 style="color: #DC0A0A; margin-bottom: 16px;">❌ Atual (com problemas)</h3>
+    <div class="mockup">
+      <div class="mockup-header">Tarefas - Implementação Atual</div>
+      <div class="mockup-body" style="background: #f6f6f6; padding: 24px;">
+
+        <!-- BLOCO 1: Header (direto no fundo cinza) -->
+        <div style="background: transparent; padding: 0 0 16px 0; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div>
+              <div style="font-size: 24px; font-weight: bold; margin-bottom: 4px;">Tarefas</div>
+              <div style="font-size: 12px; color: #737475;">As tarefas exibidas por padrão...</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="mock-button" style="border: 1px solid #d64000; background: white; color: #d64000; padding: 8px 12px; font-size: 12px;">Apontar</button>
+              <button class="mock-button" style="background: #d64000; color: white; padding: 8px 12px; font-size: 12px;">Nova tarefa</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCO 2: Filtros (card branco) -->
+        <div style="background: white; border: 1px solid #e5e5e5; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <input class="mock-input" placeholder="Buscar..." style="flex: 1; min-width: 200px;">
+            <select class="mock-input" style="width: 150px; border: 1px solid #e5e5e5;">
+              <option>Empresas: Todos</option>
+            </select>
+            <select class="mock-input" style="width: 150px;">
+              <option>Responsável: Todos</option>
+            </select>
+            <select class="mock-input" style="width: 150px;">
+              <option>Tarefas: Todos</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- BLOCO 3: Tabs + botões (card branco) -->
+        <div style="background: white; border: 1px solid #e5e5e5; border-radius: 8px;">
+          <div style="padding: 16px; border-bottom: 1px solid #e5e5e5;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <!-- Abas -->
+              <div style="display: flex; gap: 8px;">
+                <button class="mock-button" style="background: #d64000; color: white; padding: 8px 16px; font-size: 12px; border-radius: 4px;">Kanban</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 12px; border-radius: 4px;">Lista de tarefas</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 12px; border-radius: 4px;">Calendário</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 12px; border-radius: 4px;">Fluxo de tarefas</button>
+              </div>
+              <!-- Botões de ação -->
+              <div style="display: flex; gap: 8px;">
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 12px; font-size: 12px;">Exportar excel</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 12px; font-size: 12px;">Filtros Avançados</button>
+              </div>
+            </div>
+          </div>
+          <!-- Botões duplicados fora do header -->
+          <div style="padding: 8px 16px; background: #f6f6f6;">
+            <div style="display: flex; gap: 8px;">
+              <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 6px 10px; font-size: 11px;">Exportar Excel</button>
+              <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 6px 10px; font-size: 11px;">Filtros avançados</button>
+            </div>
+          </div>
+          <!-- Conteúdo -->
+          <div class="placeholder" style="height: 200px; margin: 0;">Conteúdo das abas</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top: 16px; padding: 12px; background: rgba(220,10,10,0.1); border-left: 4px solid #DC0A0A; border-radius: 4px;">
+      <strong style="color: #DC0A0A;">Problemas identificados:</strong>
+      <ul style="margin: 8px 0 0 0; padding-left: 20px; color: #DC0A0A; font-size: 13px;">
+        <li>Botões duplicados (Exportar/Filtros aparecem 2x)</li>
+        <li>Dropdowns sem ícone de seta</li>
+        <li>Background cinza aplicado dentro do bloco (errado)</li>
+        <li>Estrutura de blocos confusa</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="flex: 1;">
+    <h3 style="color: #387C2B; margin-bottom: 16px;">✓ Correto (conforme Figma)</h3>
+    <div class="mockup">
+      <div class="mockup-header">Tarefas - Especificação Figma</div>
+      <div class="mockup-body" style="background: #f6f6f6; padding: 24px;">
+
+        <!-- BLOCO 1: Header (direto no fundo cinza) -->
+        <div style="background: transparent; padding: 0 0 16px 0; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: start;">
+            <div>
+              <div style="font-size: 24px; font-weight: bold; margin-bottom: 4px;">Tarefas</div>
+              <div style="font-size: 12px; color: #737475;">As tarefas exibidas por padrão...</div>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <button class="mock-button" style="border: 1px solid #d64000; background: white; color: #d64000; padding: 8px 16px; font-size: 14px;">🕐 Apontar</button>
+              <button class="mock-button" style="background: #d64000; color: white; padding: 8px 16px; font-size: 14px;">+ Nova tarefa</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCO 2: Filtros (card branco separado) -->
+        <div style="background: white; border: 1px solid #e5e5e5; border-radius: 8px; padding: 16px 24px; margin-bottom: 16px;">
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+            <input class="mock-input" placeholder="🔍 Buscar complemento/protocolo" style="flex: 1; min-width: 250px; padding: 8px 12px;">
+            <div style="position: relative; min-width: 150px;">
+              <select class="mock-input" style="width: 100%; padding-right: 32px; appearance: none;">
+                <option>Empresas: Todos</option>
+              </select>
+              <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #737475;">▼</span>
+            </div>
+            <div style="position: relative; min-width: 150px;">
+              <select class="mock-input" style="width: 100%; padding-right: 32px; appearance: none;">
+                <option>Responsável: Todos</option>
+              </select>
+              <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #737475;">▼</span>
+            </div>
+            <div style="position: relative; min-width: 150px;">
+              <select class="mock-input" style="width: 100%; padding-right: 32px; appearance: none;">
+                <option>Tarefas: Todos</option>
+              </select>
+              <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #737475;">▼</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCO 3: Tabs + conteúdo (card branco separado) -->
+        <div style="background: white; border: 1px solid #e5e5e5; border-radius: 8px;">
+          <div style="padding: 16px 24px; border-bottom: 1px solid #e5e5e5;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <!-- Abas -->
+              <div style="display: flex; gap: 8px;">
+                <button class="mock-button" style="background: #d64000; color: white; padding: 8px 16px; font-size: 14px; border-radius: 6px; border: 1px solid #d64000;">Kanban</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 14px; border-radius: 6px;">Lista de tarefas</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 14px; border-radius: 6px;">Calendário</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 14px; border-radius: 6px;">Fluxo de tarefas</button>
+              </div>
+              <!-- Botões de ação (apenas 1x) -->
+              <div style="display: flex; gap: 8px;">
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 14px;">📥 Exportar excel</button>
+                <button class="mock-button" style="border: 1px solid #e5e5e5; background: white; padding: 8px 16px; font-size: 14px;">🔍 Filtros Avançados</button>
+              </div>
+            </div>
+          </div>
+          <!-- Conteúdo das abas (DENTRO do terceiro bloco) -->
+          <div class="placeholder" style="height: 200px; margin: 0; background: white;">Conteúdo das abas aqui</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top: 16px; padding: 12px; background: rgba(56,124,43,0.1); border-left: 4px solid #387C2B; border-radius: 4px;">
+      <strong style="color: #387C2B;">Estrutura correta:</strong>
+      <ul style="margin: 8px 0 0 0; padding-left: 20px; color: #387C2B; font-size: 13px;">
+        <li>3 blocos brancos separados no fundo cinza</li>
+        <li>Dropdowns com seta visível</li>
+        <li>Botões de ação aparecem apenas 1x</li>
+        <li>Conteúdo das abas DENTRO do terceiro bloco</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="background: #f6f6f6; padding: 24px; border-radius: 8px; margin-top: 32px;">
+  <h3 style="margin-bottom: 16px;">📋 Resumo das correções necessárias:</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #d64000;">
+      <strong style="color: #d64000;">1. Posição dos componentes do topo</strong>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color: #666;">Botões "Apontar" e "Nova tarefa" estão corretos, mas precisam de melhor espaçamento</p>
+    </div>
+    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #d64000;">
+      <strong style="color: #d64000;">2. Componentes de dropdown</strong>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color: #666;">Adicionar ícone de seta (ChevronDown) visível nos selects</p>
+    </div>
+    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #d64000;">
+      <strong style="color: #d64000;">3. Estilo de abas e botões</strong>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color: #666;">Remover botões duplicados, manter apenas 1x no header das abas</p>
+    </div>
+    <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #d64000;">
+      <strong style="color: #d64000;">4. Background e estrutura</strong>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color: #666;">3 blocos brancos separados, conteúdo das abas dentro do 3º bloco</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRD - Domínio Processos</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 2.5cm;
+            }
+            body {
+                font-size: 11pt;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+            .pagebreak {
+                page-break-before: always;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+
+        h1 {
+            color: #1a1a1a;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 28pt;
+        }
+
+        h2 {
+            color: #0066cc;
+            margin-top: 30px;
+            font-size: 20pt;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #0088cc;
+            margin-top: 20px;
+            font-size: 16pt;
+        }
+
+        h4 {
+            color: #333;
+            margin-top: 15px;
+            font-size: 13pt;
+        }
+
+        .cover {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .cover h1 {
+            border: none;
+            font-size: 36pt;
+            margin-bottom: 20px;
+        }
+
+        .cover .subtitle {
+            font-size: 18pt;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .cover .metadata {
+            font-size: 12pt;
+            color: #888;
+            margin-top: 60px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+        }
+
+        table th {
+            background-color: #0066cc;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid #0066cc;
+            overflow-x: auto;
+            font-size: 9pt;
+        }
+
+        blockquote {
+            border-left: 4px solid #0066cc;
+            padding-left: 20px;
+            margin-left: 0;
+            color: #555;
+            font-style: italic;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+        }
+
+        .status-implemented { color: #28a745; font-weight: bold; }
+        .status-partial { color: #ffc107; font-weight: bold; }
+        .status-planned { color: #dc3545; font-weight: bold; }
+
+        .priority-p0 { color: #dc3545; font-weight: bold; }
+        .priority-p1 { color: #fd7e14; font-weight: bold; }
+        .priority-p2 { color: #ffc107; font-weight: bold; }
+
+        .toc {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 30px 0;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border: none;
+        }
+
+        .toc ul {
+            list-style-type: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .badge-success { background-color: #28a745; color: white; }
+        .badge-warning { background-color: #ffc107; color: #333; }
+        .badge-danger { background-color: #dc3545; color: white; }
+        .badge-info { background-color: #17a2b8; color: white; }
+    </style>
+</head>
+<body>
+
+<!-- Capa -->
+<div class="cover pagebreak">
+    <h1>PRD - Domínio Processos</h1>
+    <div class="subtitle">Product Requirements Document - Versão Completa</div>
+    <div class="metadata">
+        <p><strong>Versão:</strong> 2.0</p>
+        <p><strong>Data:</strong> 08 de Abril de 2026</p>
+        <p><strong>Status:</strong> Em desenvolvimento</p>
+        <p><strong>Autor:</strong> Equipe de Produto</p>
+    </div>
+</div>
+
+<!-- Sumário Executivo -->
+<div class="pagebreak">
+    <h1>Sumário Executivo</h1>
+
+    <p>O <strong>Domínio Processos</strong> é um sistema completo de gestão de tarefas, documentos e fluxos de trabalho desenvolvido especificamente para escritórios contábeis. Este documento consolida tanto as funcionalidades já implementadas quanto o roadmap estratégico para os próximos 12 meses.</p>
+
+    <h3>Situação Atual (Abril 2026):</h3>
+    <ul>
+        <li><span class="badge badge-success">✅</span> <strong>7 módulos funcionais</strong> totalmente implementados</li>
+        <li><span class="badge badge-success">✅</span> <strong>20+ componentes de gestão</strong> operacionais</li>
+        <li><span class="badge badge-success">✅</span> <strong>Interface React moderna</strong> com ~15.700 linhas de código</li>
+        <li><span class="badge badge-warning">🚧</span> <strong>35 requisitos funcionais</strong> mapeados para evolução</li>
+    </ul>
+
+    <h3>Objetivo do Produto:</h3>
+    <p>Eliminar retrabalho causado por falta de integração entre sistemas, reduzir parametrizações manuais repetitivas e automatizar o envio e rastreamento de documentos para clientes.</p>
+
+    <h3>Público-Alvo:</h3>
+    <ul>
+        <li>Contadores e colaboradores operacionais</li>
+        <li>Gestores de escritórios contábeis</li>
+        <li>Clientes dos escritórios (empresas atendidas)</li>
+    </ul>
+
+    <h3>Principais Diferenciais:</h3>
+    <ol>
+        <li>Interface unificada para tarefas, documentos e comunicações</li>
+        <li>Automação de processos repetitivos</li>
+        <li>Integração nativa com Messenger e Portal do Cliente</li>
+        <li>Templates pré-configurados por tipo de escritório</li>
+        <li>Rastreamento completo de documentos enviados</li>
+    </ol>
+</div>
+
+<!-- Índice -->
+<div class="toc pagebreak">
+    <h2>Índice</h2>
+    <ul>
+        <li><a href="#visao-geral">1. Visão Geral do Produto</a></li>
+        <li><a href="#personas">2. Personas e Casos de Uso</a></li>
+        <li><a href="#arquitetura">3. Arquitetura do Sistema</a></li>
+        <li><a href="#modulos">4. Módulos Funcionais</a>
+            <ul>
+                <li><a href="#visao-geral-dashboard">4.1 Visão Geral & Dashboard</a></li>
+                <li><a href="#tarefas">4.2 Gestão de Tarefas</a></li>
+                <li><a href="#documentos">4.3 Documentos Express</a></li>
+                <li><a href="#circular">4.4 Circular</a></li>
+                <li><a href="#integracao">4.5 Status de Integração</a></li>
+                <li><a href="#relatorios">4.6 Relatórios</a></li>
+                <li><a href="#auditoria">4.7 Auditoria</a></li>
+            </ul>
+        </li>
+        <li><a href="#configuracoes">5. Configurações e Administração</a></li>
+        <li><a href="#roadmap">6. Roadmap Consolidado</a></li>
+        <li><a href="#apendice">7. Apêndice Técnico</a></li>
+    </ul>
+</div>
+
+<!-- 1. Visão Geral -->
+<div class="pagebreak">
+    <h1 id="visao-geral">1. Visão Geral do Produto</h1>
+
+    <h2>1.1 Contexto e Problema</h2>
+
+    <p>Escritórios contábeis enfrentam desafios operacionais que impactam diretamente sua produtividade e a experiência de seus clientes.</p>
+
+    <h3>Problemas Identificados</h3>
+
+    <h4>P1 - Retrabalho Excessivo</h4>
+    <ul>
+        <li>Cadastros duplicados entre sistemas diferentes (ERP, Messenger, Portal)</li>
+        <li>Parametrizações manuais repetitivas para cada cliente</li>
+        <li>Falta de sincronização entre módulos</li>
+    </ul>
+
+    <h4>P2 - Baixa Produtividade</h4>
+    <ul>
+        <li>Excesso de cliques para tarefas simples (média de 7-10 cliques por tarefa)</li>
+        <li>Processos manuais que poderiam ser automatizados</li>
+        <li>Dificuldade de acompanhar status de múltiplas tarefas</li>
+    </ul>
+
+    <h4>P3 - Falta de Rastreamento</h4>
+    <ul>
+        <li>Impossibilidade de saber se cliente recebeu/visualizou documentos</li>
+        <li>Ausência de alertas para tarefas não geradas ou atrasadas</li>
+        <li>Dificuldade de auditoria de ações realizadas</li>
+    </ul>
+
+    <h3>Impacto nos Negócios</h3>
+    <ul>
+        <li>⏱️ <strong>Tempo perdido:</strong> 30-40% do tempo em tarefas manuais evitáveis</li>
+        <li>💸 <strong>Custos elevados:</strong> Retrabalho aumenta custos operacionais em ~25%</li>
+        <li>😞 <strong>Insatisfação:</strong> Clientes reclamam de atrasos e falta de transparência</li>
+        <li>📉 <strong>Churn:</strong> ~15-20% dos clientes abandonam nos primeiros 3 meses</li>
+    </ul>
+
+    <h2>1.2 Solução Proposta</h2>
+
+    <p>O <strong>Domínio Processos</strong> oferece uma plataforma integrada que:</p>
+    <ol>
+        <li><strong>Centraliza</strong> todas as operações de gestão de processos contábeis</li>
+        <li><strong>Automatiza</strong> tarefas recorrentes e parametrizações</li>
+        <li><strong>Integra</strong> nativamente com Messenger e Portal do Cliente</li>
+        <li><strong>Rastreia</strong> todos os documentos e comunicações</li>
+        <li><strong>Acelera</strong> onboarding com templates pré-configurados</li>
+    </ol>
+
+    <h3>Benefícios Esperados</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Métrica</th>
+                <th>Objetivo</th>
+                <th>Prazo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Redução de cadastros duplicados</td>
+                <td>80%</td>
+                <td>6 meses</td>
+            </tr>
+            <tr>
+                <td>Redução de cliques por tarefa</td>
+                <td>60% (de 10 para 4 cliques)</td>
+                <td>3 meses</td>
+            </tr>
+            <tr>
+                <td>Taxa de adoção 30 dias pós-onboarding</td>
+                <td>85%</td>
+                <td>6 meses</td>
+            </tr>
+            <tr>
+                <td>Tempo médio de resposta a falhas</td>
+                <td>&lt; 1 hora</td>
+                <td>3 meses</td>
+            </tr>
+            <tr>
+                <td>Taxa de conclusão de onboarding gamificado</td>
+                <td>70%</td>
+                <td>6 meses</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 2. Personas -->
+<div class="pagebreak">
+    <h1 id="personas">2. Personas e Casos de Uso</h1>
+
+    <h2>2.1 Persona 1: Contador/Colaborador Operacional</h2>
+
+    <table>
+        <tr>
+            <td><strong>Nome:</strong></td>
+            <td>Maria Silva</td>
+        </tr>
+        <tr>
+            <td><strong>Idade:</strong></td>
+            <td>28 anos</td>
+        </tr>
+        <tr>
+            <td><strong>Cargo:</strong></td>
+            <td>Analista Contábil</td>
+        </tr>
+        <tr>
+            <td><strong>Experiência:</strong></td>
+            <td>5 anos em escritório contábil</td>
+        </tr>
+    </table>
+
+    <h3>Perfil</h3>
+    <ul>
+        <li>Executa tarefas diárias de fechamento, envio de documentos e comunicação com clientes</li>
+        <li>Gerencia carteira de 40-60 empresas</li>
+        <li>Trabalha sob pressão de prazos fiscais e obrigações acessórias</li>
+    </ul>
+
+    <h3>Necessidades</h3>
+    <ul>
+        <li>Agilidade para concluir tarefas repetitivas</li>
+        <li>Visibilidade clara de pendências e prazos</li>
+        <li>Confirmação de que documentos foram entregues aos clientes</li>
+        <li>Menos cliques e etapas para operações comuns</li>
+    </ul>
+
+    <h3>Como o produto ajuda</h3>
+    <ul>
+        <li><span class="badge badge-success">✅</span> Conclusão de tarefas em até 3 cliques</li>
+        <li><span class="badge badge-success">✅</span> Dashboard com visão consolidada de pendências</li>
+        <li><span class="badge badge-success">✅</span> Rastreamento de documentos enviados</li>
+        <li><span class="badge badge-success">✅</span> Cadastro único sincronizado entre módulos</li>
+    </ul>
+
+    <h2>2.2 Persona 2: Gestor do Escritório</h2>
+
+    <table>
+        <tr>
+            <td><strong>Nome:</strong></td>
+            <td>João Oliveira</td>
+        </tr>
+        <tr>
+            <td><strong>Idade:</strong></td>
+            <td>42 anos</td>
+        </tr>
+        <tr>
+            <td><strong>Cargo:</strong></td>
+            <td>Sócio-Diretor</td>
+        </tr>
+        <tr>
+            <td><strong>Experiência:</strong></td>
+            <td>18 anos no setor contábil</td>
+        </tr>
+    </table>
+
+    <h3>Necessidades</h3>
+    <ul>
+        <li>Visão macro de produtividade da equipe</li>
+        <li>Relatórios para tomada de decisão</li>
+        <li>Configurações flexíveis por departamento/cliente</li>
+        <li>Alertas de anomalias (tarefas não geradas, falhas)</li>
+    </ul>
+
+    <h3>Como o produto ajuda</h3>
+    <ul>
+        <li><span class="badge badge-success">✅</span> Dashboards customizáveis por departamento/funcionário</li>
+        <li><span class="badge badge-success">✅</span> Alertas automáticos de tarefas pendentes e falhas</li>
+        <li><span class="badge badge-success">✅</span> Templates padronizados para toda equipe</li>
+        <li><span class="badge badge-success">✅</span> Exportação de relatórios em Excel/PDF</li>
+    </ul>
+</div>
+
+<!-- 6. Roadmap Consolidado -->
+<div class="pagebreak">
+    <h1 id="roadmap">6. Roadmap Consolidado - Visão Estratégica</h1>
+
+    <h2>6.1 Progresso por Épico</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Épico</th>
+                <th>RFs</th>
+                <th>Status</th>
+                <th>Prioridade</th>
+                <th>Prazo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1. Integração entre Módulos</strong></td>
+                <td>RF-01 a RF-05</td>
+                <td><span class="status-partial">🚧 20%</span></td>
+                <td><span class="priority-p0">P0 - Crítico</span></td>
+                <td>Q2/2026</td>
+            </tr>
+            <tr>
+                <td><strong>2. Parametrização e Onboarding</strong></td>
+                <td>RF-06 a RF-10</td>
+                <td><span class="status-partial">🚧 30%</span></td>
+                <td><span class="priority-p0">P0 - Crítico</span></td>
+                <td>Q2/2026</td>
+            </tr>
+            <tr>
+                <td><strong>3. Usabilidade e Redução de Complexidade</strong></td>
+                <td>RF-11 a RF-17</td>
+                <td><span class="status-partial">🚧 40%</span></td>
+                <td><span class="priority-p1">P1 - Alto</span></td>
+                <td>Q3/2026</td>
+            </tr>
+            <tr>
+                <td><strong>4. Envio e Organização de Documentos</strong></td>
+                <td>RF-18 a RF-22</td>
+                <td><span class="status-partial">🚧 25%</span></td>
+                <td><span class="priority-p1">P1 - Alto</span></td>
+                <td>Q3/2026</td>
+            </tr>
+            <tr>
+                <td><strong>5. Personalização e Comunicação</strong></td>
+                <td>RF-23 a RF-25</td>
+                <td><span class="status-partial">🚧 30%</span></td>
+                <td><span class="priority-p2">P2 - Médio</span></td>
+                <td>Q3/2026</td>
+            </tr>
+            <tr>
+                <td><strong>6. Permissões e Acessos</strong></td>
+                <td>RF-26</td>
+                <td><span class="status-partial">🚧 50%</span></td>
+                <td><span class="priority-p2">P2 - Médio</span></td>
+                <td>Q4/2026</td>
+            </tr>
+            <tr>
+                <td><strong>7. Automação</strong></td>
+                <td>RF-27 a RF-32</td>
+                <td><span class="status-planned">❌ 0%</span></td>
+                <td><span class="priority-p1">P1 - Alto</span></td>
+                <td>Q4/2026</td>
+            </tr>
+            <tr>
+                <td><strong>8. Suporte e Engajamento</strong></td>
+                <td>RF-33 a RF-35</td>
+                <td><span class="status-planned">❌ 0%</span></td>
+                <td><span class="priority-p2">P2 - Médio</span></td>
+                <td>Q1/2027</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>6.2 Stack Tecnológico</h2>
+
+    <h3>Frontend</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Tecnologia</th>
+                <th>Versão</th>
+                <th>Propósito</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>React</strong></td>
+                <td>18.3.1</td>
+                <td>Framework UI principal</td>
+            </tr>
+            <tr>
+                <td><strong>TypeScript</strong></td>
+                <td>Latest</td>
+                <td>Type safety</td>
+            </tr>
+            <tr>
+                <td><strong>Vite</strong></td>
+                <td>6.3.5</td>
+                <td>Build tool e dev server</td>
+            </tr>
+            <tr>
+                <td><strong>TailwindCSS</strong></td>
+                <td>4.1.12</td>
+                <td>Utility-first CSS</td>
+            </tr>
+            <tr>
+                <td><strong>Material-UI</strong></td>
+                <td>7.3.5</td>
+                <td>Componentes UI</td>
+            </tr>
+            <tr>
+                <td><strong>Radix UI</strong></td>
+                <td>Latest</td>
+                <td>Componentes headless</td>
+            </tr>
+            <tr>
+                <td><strong>React Router</strong></td>
+                <td>7.13.0</td>
+                <td>Navegação</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <blockquote>
+        <p><strong>Nota Importante:</strong> O frontend atual <strong>NÃO possui backend</strong>. É um protótipo exportado do Figma com dados mockados. Backend será necessário para implementar os RFs de integração, automação e persistência.</p>
+    </blockquote>
+</div>
+
+<!-- Instruções de PDF -->
+<div class="pagebreak">
+    <h1>Como Salvar este Documento como PDF</h1>
+
+    <h2>Método 1: Navegador (Mais Simples)</h2>
+    <ol>
+        <li>Abra este arquivo HTML em seu navegador (Chrome, Edge, Firefox)</li>
+        <li>Pressione <code>Ctrl+P</code> (ou <code>Cmd+P</code> no Mac)</li>
+        <li>Selecione "Salvar como PDF" ou "Microsoft Print to PDF"</li>
+        <li>Ajuste as configurações:
+            <ul>
+                <li>✅ Marcar "Gráficos de fundo"</li>
+                <li>✅ Tamanho: A4</li>
+                <li>✅ Margens: Padrão</li>
+            </ul>
+        </li>
+        <li>Clique em "Salvar"</li>
+    </ol>
+
+    <h2>Método 2: Pandoc (Profissional)</h2>
+    <p>Se você instalar o Pandoc:</p>
+    <pre><code># Instalar Pandoc
+# Windows: https://pandoc.org/installing.html
+# Mac: brew install pandoc
+# Linux: apt-get install pandoc
+
+# Gerar PDF a partir do Markdown
+cd docs/prd
+pandoc PRD-Dominio-Processos-Completo.md -o PRD-Dominio-Processos-Completo.pdf \
+  --pdf-engine=xelatex \
+  --toc \
+  --number-sections \
+  --highlight-style=tango</code></pre>
+
+    <h2>Método 3: VSCode</h2>
+    <ol>
+        <li>Instalar extensão "Markdown PDF"</li>
+        <li>Abrir arquivo <code>.md</code></li>
+        <li>Clicar com botão direito → "Markdown PDF: Export (pdf)"</li>
+    </ol>
+</div>
+
+<div style="text-align: center; margin-top: 50px; padding: 20px; border-top: 2px solid #ddd;">
+    <p style="color: #888; font-size: 10pt;">
+        <strong>PRD - Domínio Processos</strong> | Versão 2.0 | Abril 2026<br>
+        Gerado automaticamente | Para mais informações, consulte o arquivo Markdown original
+    </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<h2>Abordagens para implementar as correções</h2>
+<p class="subtitle">Corrigir: Botões duplicados, Dropdowns sem seta, Estilo das abas, Background/estrutura, Posição dos botões</p>
+
+<div class="options">
+  <div class="option" data-choice="incremental" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Abordagem Incremental (Recomendado)</h3>
+      <p style="margin-bottom: 12px;">Corrigir um problema por vez, na ordem de prioridade:</p>
+
+      <div style="background: #f6f6f6; padding: 12px; border-radius: 4px; margin-bottom: 12px;">
+        <strong style="display: block; margin-bottom: 8px;">Ordem de implementação:</strong>
+        <ol style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.6;">
+          <li><strong>Passo 1:</strong> Remover botões duplicados (mais fácil)</li>
+          <li><strong>Passo 2:</strong> Reorganizar estrutura de blocos (crítico)</li>
+          <li><strong>Passo 3:</strong> Adicionar setas nos dropdowns</li>
+          <li><strong>Passo 4:</strong> Ajustar estilo das abas</li>
+          <li><strong>Passo 5:</strong> Ajustar posição dos botões do topo</li>
+        </ol>
+      </div>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Vantagens</h4>
+          <ul>
+            <li>Menor risco de quebrar funcionalidades</li>
+            <li>Fácil de testar cada mudança</li>
+            <li>Pode parar a qualquer momento se necessário</li>
+            <li>Melhor para debugging</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Desvantagens</h4>
+          <ul>
+            <li>Mais commits/iterações</li>
+            <li>Leva mais tempo total</li>
+            <li>Visual fica "meio corrigido" durante processo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="refactor-complete" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Refatoração Completa</h3>
+      <p style="margin-bottom: 12px;">Reescrever toda a estrutura de uma vez, implementando todas as correções simultaneamente:</p>
+
+      <div style="background: #f6f6f6; padding: 12px; border-radius: 4px; margin-bottom: 12px;">
+        <strong style="display: block; margin-bottom: 8px;">Estratégia:</strong>
+        <ul style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.6;">
+          <li>Criar nova estrutura de 3 blocos do zero</li>
+          <li>Implementar todos os filtros com setas</li>
+          <li>Refazer header de abas sem duplicações</li>
+          <li>Aplicar todos os estilos de uma vez</li>
+          <li>Testar tudo junto no final</li>
+        </ul>
+      </div>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Vantagens</h4>
+          <ul>
+            <li>Mais rápido no total</li>
+            <li>Código mais limpo e consistente</li>
+            <li>1 commit único com tudo</li>
+            <li>Visual completo de uma vez</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Desvantagens</h4>
+          <ul>
+            <li>Alto risco de quebrar funcionalidades</li>
+            <li>Difícil de debugar se algo der errado</li>
+            <li>Sem pontos de rollback intermediários</li>
+            <li>Mais complexo para revisar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Abordagem Híbrida (Blocos Agrupados)</h3>
+      <p style="margin-bottom: 12px;">Agrupar correções relacionadas em 3 etapas maiores:</p>
+
+      <div style="background: #f6f6f6; padding: 12px; border-radius: 4px; margin-bottom: 12px;">
+        <strong style="display: block; margin-bottom: 8px;">Etapas:</strong>
+        <ol style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.6;">
+          <li><strong>Etapa 1 - Estrutura:</strong> Reorganizar os 3 blocos + remover duplicados</li>
+          <li><strong>Etapa 2 - Componentes:</strong> Dropdowns com setas + estilo das abas</li>
+          <li><strong>Etapa 3 - Acabamento:</strong> Posição dos botões do topo + ajustes finais</li>
+        </ol>
+      </div>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Vantagens</h4>
+          <ul>
+            <li>Balanceia velocidade e segurança</li>
+            <li>Agrupa mudanças relacionadas</li>
+            <li>3 pontos de validação claros</li>
+            <li>Razoavelmente rápido</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Desvantagens</h4>
+          <ul>
+            <li>Ainda tem algum risco em cada etapa</li>
+            <li>Precisa planejar bem os agrupamentos</li>
+            <li>Não tão granular quanto incremental</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 32px; padding: 16px; background: rgba(56,124,43,0.1); border-left: 4px solid #387C2B; border-radius: 4px;">
+  <strong style="color: #387C2B; display: block; margin-bottom: 8px;">💡 Minha Recomendação: Abordagem A (Incremental)</strong>
+  <p style="margin: 0; font-size: 13px; color: #2d5a22;">
+    Para este tipo de correção visual, o incremental é mais seguro. Você pode testar cada mudança isoladamente e garantir que nada quebra.
+    A estrutura de blocos (item D) é a mais crítica e deve ser feita com cuidado.
+  </p>
+</div>

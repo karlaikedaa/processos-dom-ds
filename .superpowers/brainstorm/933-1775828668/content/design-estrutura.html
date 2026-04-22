@@ -1,0 +1,114 @@
+<h2>Design: Estrutura de Blocos da Tela Tarefas</h2>
+<p class="subtitle">Seção 1 - Organização geral da página</p>
+
+<div class="mockup">
+  <div class="mockup-header">Estrutura de 3 Blocos</div>
+  <div class="mockup-body" style="background: #f6f6f6; padding: 24px;">
+
+    <!-- BLOCO 1: Header -->
+    <div style="background: transparent; padding: 0; margin-bottom: 16px;">
+      <div style="padding: 16px; background: rgba(214,64,0,0.05); border: 2px dashed #d64000; border-radius: 8px;">
+        <strong style="color: #d64000; display: block; margin-bottom: 8px;">📍 BLOCO 1: Header (direto no fundo cinza)</strong>
+        <div style="font-size: 13px; color: #666; line-height: 1.6;">
+          • Background: <code>transparent</code> (sem card branco)<br>
+          • Padding: <code>0</code> (sem padding extra)<br>
+          • Margin-bottom: <code>16px</code><br>
+          • Contém: Título "Tarefas" + Descrição + Botões "Apontar" e "Nova tarefa"
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCO 2: Filtros -->
+    <div style="background: white; border: 1px solid #e5e5e5; border-radius: 8px; padding: 16px 24px; margin-bottom: 16px;">
+      <strong style="color: #d64000; display: block; margin-bottom: 8px;">📍 BLOCO 2: Filtros (card branco separado)</strong>
+      <div style="font-size: 13px; color: #666; line-height: 1.6;">
+        • Background: <code>#ffffff</code><br>
+        • Border: <code>1px solid #e5e5e5</code><br>
+        • Border-radius: <code>8px</code><br>
+        • Padding: <code>16px 24px</code> (vertical 16px, horizontal 24px)<br>
+        • Margin-bottom: <code>16px</code><br>
+        • Contém: Campo de busca + 4 dropdowns com setas
+      </div>
+    </div>
+
+    <!-- BLOCO 3: Tabs + Conteúdo -->
+    <div style="background: white; border: 1px solid #e5e5e5; border-radius: 8px;">
+      <div style="padding: 16px 24px; border-bottom: 1px solid #e5e5e5; background: rgba(214,64,0,0.02);">
+        <strong style="color: #d64000; display: block; margin-bottom: 8px;">📍 BLOCO 3.1: Header de Abas</strong>
+        <div style="font-size: 13px; color: #666; line-height: 1.6;">
+          • Background: <code>#ffffff</code><br>
+          • Padding: <code>16px 24px</code><br>
+          • Border-bottom: <code>1px solid #e5e5e5</code><br>
+          • Contém: 4 abas + 2 botões de ação (Exportar, Filtros Avançados)<br>
+          • <strong style="color: #DC0A0A;">⚠️ SEM botões duplicados abaixo</strong>
+        </div>
+      </div>
+
+      <div style="padding: 0; background: rgba(56,124,43,0.05);">
+        <div style="padding: 24px; margin: 0;">
+          <strong style="color: #387C2B; display: block; margin-bottom: 8px;">📍 BLOCO 3.2: Conteúdo das Abas</strong>
+          <div style="font-size: 13px; color: #2d5a22; line-height: 1.6;">
+            • Background: <code>#ffffff</code> (herda do bloco 3)<br>
+            • Padding: <code>0</code> (sem padding extra no wrapper)<br>
+            • <strong>IMPORTANTE:</strong> O conteúdo das views (Kanban, Lista, Calendário, Fluxo) renderiza AQUI DENTRO<br>
+            • Cada view gerencia seu próprio padding interno
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="margin-top: 24px; background: #f6f6f6; padding: 20px; border-radius: 8px;">
+  <h3 style="margin-bottom: 16px;">📋 Hierarquia JSX/React</h3>
+  <pre style="background: #2d3748; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.5;"><code>&lt;div className="flex flex-col h-full" style={{ background: '#f6f6f6' }}&gt;
+
+  {/* BLOCO 1: Header - direto no fundo cinza */}
+  &lt;div className="px-6 pt-6 pb-4"&gt;
+    &lt;div className="flex items-center justify-between"&gt;
+      &lt;h1&gt;Tarefas&lt;/h1&gt;
+      &lt;div&gt;Botões Apontar + Nova tarefa&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  {/* BLOCO 2: Filtros - card branco separado */}
+  &lt;div className="mx-6" style={{ marginTop: '16px' }}&gt;
+    &lt;div className="bg-white rounded-lg px-6 py-4 border"&gt;
+      Busca + Dropdowns com setas
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  {/* BLOCO 3: Tabs + Conteúdo - card branco separado */}
+  &lt;div className="mx-6 mt-4"&gt;
+    &lt;div className="bg-white rounded-lg border"&gt;
+
+      {/* BLOCO 3.1: Header de Abas */}
+      &lt;div className="px-6 py-4 border-b"&gt;
+        &lt;div&gt;4 Abas + 2 Botões de ação&lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* BLOCO 3.2: Conteúdo das Abas */}
+      &lt;div className="flex-1 flex overflow-hidden"&gt;
+        {viewMode === 'kanban' && &lt;KanbanView /&gt;}
+        {viewMode === 'lista' && &lt;ListaView /&gt;}
+        {viewMode === 'calendario' && &lt;CalendarioView /&gt;}
+        {viewMode === 'fluxo' && &lt;FluxoView /&gt;}
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+</div>
+
+<div style="margin-top: 24px; padding: 16px; background: rgba(254,166,1,0.1); border-left: 4px solid #FEA601; border-radius: 4px;">
+  <strong style="color: #9a6a00; display: block; margin-bottom: 8px;">⚠️ Mudança Crítica</strong>
+  <p style="margin: 0; font-size: 13px; color: #9a6a00; line-height: 1.6;">
+    A principal mudança é <strong>remover o wrapper extra</strong> que estava criando os botões duplicados e reorganizar para que:
+    <br>• Bloco 3.1 = Header com abas E botões (apenas 1x)
+    <br>• Bloco 3.2 = Conteúdo das views (sem wrapper intermediário)
+  </p>
+</div>
+
+<p style="margin-top: 24px; font-size: 14px; color: #666;">Essa estrutura está correta? Posso prosseguir para os detalhes dos componentes (dropdowns, abas, botões)?</p>

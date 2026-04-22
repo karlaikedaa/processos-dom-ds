@@ -1,0 +1,161 @@
+/**
+ * Design Tokens
+ * Extraidos do Figma Design System
+ * 
+ * @see https://www.figma.com/design/Q2p5d5mIahsEPxXYMOA16V/Dom-DS-Core-Web
+ */
+
+// Cores
+export const colors = {
+  colors: {
+    gray: {
+      '100': '#f6f6f6',
+      '600': '#737475',
+    },
+    orange: {
+      '200': '#ffb899',
+      '400': '#ff7033',
+      '600': '#d64000',
+      '700': '#992e00',
+      '800': '#661f00',
+    },
+    mint: {
+      '700': '#2e6b58',
+    },
+    red: {
+      '600': '#b92f30',
+    },
+    yellow: {
+      '500': '#e49e1b',
+    },
+    blue: {
+      '600': '#0766c5',
+    },
+    purple: {
+      '500': '#904eb1',
+    },
+  },
+  elevation: {
+    elevation1: {
+      color: '#0000001e',
+    },
+    elevation2: {
+      color: '#0000001e',
+    },
+  },
+  elements: {
+    'background 02': '#f6f6f6',
+    'background 05': '#992e00',
+    notification: '#b92f30',
+  },
+  'text color': {
+    placeholder: '#737475',
+  },
+  action: {
+    primary: {
+      background: '#d64000',
+      border: '#d64000',
+      icon: '#d64000',
+      label: '#d64000',
+    },
+    secondary: {
+      background: '#992e00',
+      border: '#992e00',
+      icon: '#992e00',
+      label: '#992e00',
+    },
+  },
+  active: {
+    background: '#f6f6f6',
+  },
+  selected: {
+    background: '#d64000',
+    border: '#d64000',
+    icon: '#d64000',
+    label: '#d64000',
+  },
+  'hover outline': {
+    background: '#d6d7d951',
+  },
+  'pressed outline': {
+    background: '#bdbfc051',
+  },
+  positive: {
+    border: '#2e6b58',
+    icon: '#2e6b58',
+    label: '#2e6b58',
+    placeholder: '#2e6b58',
+    'support text': '#2e6b58',
+  },
+  neutral: {
+    'background 01': '#f6f6f6',
+  },
+  link: {
+    label: {
+      default: '#0766c5',
+    },
+    icon: {
+      default: '#0766c5',
+    },
+  },
+} as const;
+
+// Tipografia
+export const typography = {
+  fontFamily: {
+Source_Sans_3: 'Source Sans 3',
+  },
+  fontSize: {
+'20': '20px',
+      sm: '14px',
+  },
+  fontWeight: {
+regular: 400,
+  },
+  lineHeight: {
+
+  },
+} as const;
+
+// Espacamentos
+export const spacing = {
+  '0': '0px',
+  '4': '16px',
+  '6': '48px',
+  none: '0px',
+  half: '4px',
+  '1x': '8px',
+  '1_5x': '12px',
+  '2x': '16px',
+  '2_5x': '20px',
+  '3x': '24px',
+  '4x': '32px',
+  '5x': '40px',
+  '6x': '48px',
+  '10x': '80px',
+  '0,25': '2px',
+  '0,5': '4px',
+  '1': '8px',
+  '1,5': '12px',
+  '2': '16px',
+  '5': '40px',
+} as const;
+
+// Border Radius
+export const borderRadius = {
+  'border radius/none': '0px',
+  'border radius/xs': '4px',
+  'border radius/sm': '8px',
+  'border radius/xl': '40px',
+  'border radius/circular': '500px',
+  s: '4px',
+  m: '8px',
+  pill: '100px',
+  'border/border radius/default': '4px',
+} as const;
+
+// Tipos TypeScript para autocomplete
+export type ColorToken = typeof colors;
+export type TypographyToken = typeof typography;
+export type SpacingToken = typeof spacing;
+export type BorderRadiusToken = typeof borderRadius;

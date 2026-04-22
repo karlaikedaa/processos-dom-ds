@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visão Geral - Dashboard | Mockup para Figma</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f6f6f6;
+      padding: 24px;
+      color: #1a1a1a;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .header-card h3 {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .header-card .value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 48px;
+      margin-bottom: 16px;
+    }
+
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 8px;
+      background: #f6f6f6;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #387C2B;
+      transition: width 300ms;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #387C2B;
+      min-width: 38px;
+    }
+
+    .alert-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .alert-warning {
+      background: rgba(254, 166, 1, 0.12);
+      color: #9a6a00;
+    }
+
+    .alert-info {
+      background: rgba(254, 166, 1, 0.08);
+      color: #9a6a00;
+    }
+
+    .alert-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .alert-text {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .alert-button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .highlight-card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .highlight-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .highlight-item {
+      margin-bottom: 12px;
+    }
+
+    .highlight-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .mini-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mini-track {
+      flex: 1;
+      height: 8px;
+      background: #f6f6f6;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .mini-fill {
+      height: 100%;
+      transition: width 300ms;
+    }
+
+    .mini-percent {
+      font-size: 12px;
+      font-weight: 600;
+      min-width: 32px;
+      text-align: right;
+    }
+
+    .donut-section {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .donut-container {
+      width: 300px;
+      height: 300px;
+      flex-shrink: 0;
+    }
+
+    .legend {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-text {
+      flex: 1;
+    }
+
+    .legend-name {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .legend-value {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .grid-6 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .action-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      min-height: 100px;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: box-shadow 200ms;
+    }
+
+    .action-button:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .action-label {
+      font-size: 12px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      padding: 8px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    thead th:not(:first-child) {
+      text-align: right;
+    }
+
+    tbody td {
+      padding: 8px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    tbody td:not(:first-child) {
+      text-align: right;
+    }
+
+    tbody tr:hover {
+      background: #f9f9f9;
+    }
+
+    .table-progress {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .table-track {
+      width: 64px;
+      height: 6px;
+      background: #f6f6f6;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .table-fill {
+      height: 100%;
+      background: #387C2B;
+    }
+
+    .table-percent {
+      font-size: 12px;
+      font-weight: 600;
+      min-width: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-recorrente {
+      background: rgba(56, 124, 43, 0.1);
+      color: #387C2B;
+    }
+
+    .badge-esporadico {
+      background: rgba(254, 166, 1, 0.1);
+      color: #FEA601;
+    }
+
+    .badge-fluxo {
+      background: rgba(144, 78, 177, 0.1);
+      color: #904eb1;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .secondary-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: none;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header com Barra de Progresso -->
+    <div class="card header-card">
+      <div class="header-stats">
+        <div>
+          <h3>Tarefas vencendo hoje</h3>
+          <div class="value" style="color: #d64000;">800 pendentes</div>
+        </div>
+        <div>
+          <h3>Tarefas concluídas</h3>
+          <div class="value" style="color: #387C2B;">2000</div>
+        </div>
+        <div>
+          <h3>Total</h3>
+          <div class="value">2800</div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 71%;"></div>
+        </div>
+        <span class="progress-label">71%</span>
+      </div>
+    </div>
+
+    <!-- Banners de Alerta -->
+    <div class="alert-banner alert-warning">
+      <div class="alert-content">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span class="alert-text">12 Tarefas com falha de envio - últimos 30 dias</span>
+      </div>
+      <button class="alert-button">
+        Abrir tarefas
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="alert-banner alert-info">
+      <div class="alert-content">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span class="alert-text">07 configurações não realizadas</span>
+      </div>
+      <button class="alert-button">
+        Abrir detalhes
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 3 Cards de Destaque -->
+    <div class="grid-3">
+      <div class="highlight-card">
+        <h4>4 pontos de atenção</h4>
+        <div class="highlight-item">
+          <div class="highlight-label">
+            <span>Empresas sem responsável vinculado</span>
+            <span style="font-weight: 600;">12</span>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-track">
+              <div class="mini-fill" style="width: 30%; background: #DC0A0A;"></div>
+            </div>
+            <span class="mini-percent" style="color: #DC0A0A;">30%</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-label">
+            <span>Tarefas sem funcionário responsável</span>
+            <span style="font-weight: 600;">8</span>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-track">
+              <div class="mini-fill" style="width: 20%; background: #FEA601;"></div>
+            </div>
+            <span class="mini-percent" style="color: #FEA601;">20%</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-label">
+            <span>Agrupadores não configurados</span>
+            <span style="font-weight: 600;">5</span>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-track">
+              <div class="mini-fill" style="width: 13%; background: #904eb1;"></div>
+            </div>
+            <span class="mini-percent" style="color: #904eb1;">13%</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-label">
+            <span>Clientes inativos</span>
+            <span style="font-weight: 600;">3</span>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-track">
+              <div class="mini-fill" style="width: 8%; background: #8B8D8F;"></div>
+            </div>
+            <span class="mini-percent" style="color: #8B8D8F;">8%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-card">
+        <h4>120 tarefas abertas com documentos pendentes</h4>
+        <div style="margin-top: 12px;">
+          <div class="highlight-label" style="margin-bottom: 8px;">
+            <span>Cobrados</span>
+            <span style="font-weight: 600;">80</span>
+          </div>
+          <div class="highlight-label" style="margin-bottom: 16px;">
+            <span>Não cobrados</span>
+            <span style="font-weight: 600;">40</span>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-track">
+              <div class="mini-fill" style="width: 67%; background: #d64000;"></div>
+            </div>
+            <span class="mini-percent" style="color: #d64000;">67%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-card">
+        <h4>150 a concluir hoje</h4>
+        <div style="margin-top: 12px;">
+          <div class="highlight-label" style="margin-bottom: 8px;">
+            <span>Tarefas sujeitas à multa</span>
+            <span style="font-weight: 600;">150</span>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-track">
+              <div class="mini-fill" style="width: 75%; background: #904eb1;"></div>
+            </div>
+            <span class="mini-percent" style="color: #904eb1;">75%</span>
+          </div>
+          <div style="font-size: 12px; color: #666; margin-top: 8px;">
+            75% das tarefas críticas de hoje
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resumo de Tarefas - Donut -->
+    <div class="card">
+      <h3 class="section-title" style="margin-bottom: 16px;">Resumo de tarefas</h3>
+      <div class="donut-section">
+        <div class="donut-container">
+          <svg viewBox="0 0 300 300" width="300" height="300">
+            <circle cx="150" cy="150" r="120" fill="none" stroke="#DC0A0A" stroke-width="40"
+              stroke-dasharray="200 2000" transform="rotate(-90 150 150)" />
+            <circle cx="150" cy="150" r="120" fill="none" stroke="#8B8D8F" stroke-width="40"
+              stroke-dasharray="11 2000" stroke-dashoffset="-200" transform="rotate(-90 150 150)" />
+            <circle cx="150" cy="150" r="120" fill="none" stroke="#FEA601" stroke-width="40"
+              stroke-dasharray="59 2000" stroke-dashoffset="-211" transform="rotate(-90 150 150)" />
+            <circle cx="150" cy="150" r="120" fill="none" stroke="#904eb1" stroke-width="40"
+              stroke-dasharray="97 2000" stroke-dashoffset="-270" transform="rotate(-90 150 150)" />
+            <circle cx="150" cy="150" r="120" fill="none" stroke="#DC0A0A" stroke-width="40"
+              stroke-dasharray="41 2000" stroke-dashoffset="-367" transform="rotate(-90 150 150)" />
+            <circle cx="150" cy="150" r="120" fill="none" stroke="#387C2B" stroke-width="40"
+              stroke-dasharray="346 2000" stroke-dashoffset="-408" transform="rotate(-90 150 150)" />
+          </svg>
+        </div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #DC0A0A;"></div>
+            <div class="legend-text">
+              <div class="legend-name">Atrasadas</div>
+              <div class="legend-value">899</div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #8B8D8F;"></div>
+            <div class="legend-text">
+              <div class="legend-name">Desconsideradas</div>
+              <div class="legend-value">38</div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #FEA601;"></div>
+            <div class="legend-text">
+              <div class="legend-name">Em andamento</div>
+              <div class="legend-value">210</div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #904eb1;"></div>
+            <div class="legend-text">
+              <div class="legend-name">Aguardando aprovação</div>
+              <div class="legend-value">347</div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #DC0A0A;"></div>
+            <div class="legend-text">
+              <div class="legend-name">Com impedimento</div>
+              <div class="legend-value">148</div>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #387C2B;"></div>
+            <div class="legend-text">
+              <div class="legend-name">Concluídas</div>
+              <div class="legend-value">1240</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="card">
+      <h3 class="section-title" style="margin-bottom: 16px;">Ações rápidas</h3>
+      <div class="grid-6">
+        <button class="action-button">
+          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="#0766c5" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="action-label">Calendário de tarefas</span>
+        </button>
+        <button class="action-button">
+          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="#d64000" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span class="action-label">Lista de tarefas</span>
+        </button>
+        <button class="action-button">
+          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="#2e6b58" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span class="action-label">Kanban</span>
+        </button>
+        <button class="action-button">
+          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="#904eb1" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+          <span class="action-label">Fluxo de tarefas</span>
+        </button>
+        <button class="action-button">
+          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="#e49e1b" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span class="action-label">Item mais acessado 1</span>
+        </button>
+        <button class="action-button">
+          <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="#b92f30" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span class="action-label">Item mais acessado 2</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Desempenho -->
+    <div class="grid-2">
+      <div class="card" style="padding: 24px;">
+        <div class="section-header">
+          <h3 class="section-title">Desempenho por responsável</h3>
+          <button class="secondary-button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="20" x2="12" y2="10"></line>
+              <line x1="18" y1="20" x2="18" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="16"></line>
+            </svg>
+            Exibir como gráfico
+          </button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Responsável</th>
+              <th>Abertas</th>
+              <th>Concluídas</th>
+              <th>Progresso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Maria Silva</td>
+              <td>48</td>
+              <td>45</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 94%;"></div>
+                  </div>
+                  <span class="table-percent">94%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>João Pereira</td>
+              <td>35</td>
+              <td>30</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 86%;"></div>
+                  </div>
+                  <span class="table-percent">86%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Ana Torres</td>
+              <td>29</td>
+              <td>28</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 97%;"></div>
+                  </div>
+                  <span class="table-percent">97%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Carlos Rocha</td>
+              <td>22</td>
+              <td>20</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 91%;"></div>
+                  </div>
+                  <span class="table-percent">91%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Fernanda Lima</td>
+              <td>18</td>
+              <td>17</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 94%;"></div>
+                  </div>
+                  <span class="table-percent">94%</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="padding: 24px;">
+        <div class="section-header">
+          <h3 class="section-title">Desempenho por departamento</h3>
+          <button class="secondary-button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="20" x2="12" y2="10"></line>
+              <line x1="18" y1="20" x2="18" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="16"></line>
+            </svg>
+            Exibir como gráfico
+          </button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Departamento</th>
+              <th>Abertas</th>
+              <th>Concluídas</th>
+              <th>Progresso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Contábil</td>
+              <td>48</td>
+              <td>120</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 71%;"></div>
+                  </div>
+                  <span class="table-percent">71%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Fiscal</td>
+              <td>35</td>
+              <td>80</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 70%;"></div>
+                  </div>
+                  <span class="table-percent">70%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Administrativo</td>
+              <td>29</td>
+              <td>95</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 77%;"></div>
+                  </div>
+                  <span class="table-percent">77%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Pessoal</td>
+              <td>22</td>
+              <td>110</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 83%;"></div>
+                  </div>
+                  <span class="table-percent">83%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Patrimônio</td>
+              <td>18</td>
+              <td>75</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 81%;"></div>
+                  </div>
+                  <span class="table-percent">81%</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tarefas por Empresa -->
+    <div class="card">
+      <h3 class="section-title" style="margin-bottom: 16px;">Tarefas por empresa</h3>
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Empresa</th>
+              <th>Total</th>
+              <th>Abertas</th>
+              <th>Aberta em atraso</th>
+              <th>Aberta com multa</th>
+              <th>Concluídas</th>
+              <th>Concluídas em atraso</th>
+              <th>Concluídas com multa</th>
+              <th>Progresso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Empresa ABC Ltda</td>
+              <td>100</td>
+              <td>48</td>
+              <td>2</td>
+              <td>2</td>
+              <td>52</td>
+              <td>1</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 52%;"></div>
+                  </div>
+                  <span class="table-percent">52%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Empresa XYZ S/A</td>
+              <td>85</td>
+              <td>35</td>
+              <td>4</td>
+              <td>2</td>
+              <td>50</td>
+              <td>2</td>
+              <td>1</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 59%;"></div>
+                  </div>
+                  <span class="table-percent">59%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>DEF Comércio</td>
+              <td>70</td>
+              <td>29</td>
+              <td>0</td>
+              <td>0</td>
+              <td>41</td>
+              <td>0</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 59%;"></div>
+                  </div>
+                  <span class="table-percent">59%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>GHI Serviços</td>
+              <td>65</td>
+              <td>22</td>
+              <td>1</td>
+              <td>2</td>
+              <td>43</td>
+              <td>1</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 66%;"></div>
+                  </div>
+                  <span class="table-percent">66%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>JKL Indústria</td>
+              <td>50</td>
+              <td>18</td>
+              <td>0</td>
+              <td>0</td>
+              <td>32</td>
+              <td>0</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 64%;"></div>
+                  </div>
+                  <span class="table-percent">64%</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tarefas -->
+    <div class="card">
+      <h3 class="section-title" style="margin-bottom: 16px;">Tarefas</h3>
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Tarefa</th>
+              <th>Tipo</th>
+              <th>Total</th>
+              <th>Abertas</th>
+              <th>Aberta em atraso</th>
+              <th>Aberta com multa</th>
+              <th>Concluídas</th>
+              <th>Concluídas em atraso</th>
+              <th>Concluídas com multa</th>
+              <th>Progresso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DCTF Ago/25</td>
+              <td><span class="badge badge-recorrente">Recorrente</span></td>
+              <td>48</td>
+              <td>46</td>
+              <td>4</td>
+              <td>2</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 4%;"></div>
+                  </div>
+                  <span class="table-percent">4%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>REINF Out/25</td>
+              <td><span class="badge badge-recorrente">Recorrente</span></td>
+              <td>35</td>
+              <td>30</td>
+              <td>0</td>
+              <td>0</td>
+              <td>5</td>
+              <td>0</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 14%;"></div>
+                  </div>
+                  <span class="table-percent">14%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Alteração Contratual</td>
+              <td><span class="badge badge-esporadico">Esporádico</span></td>
+              <td>22</td>
+              <td>22</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 0%;"></div>
+                  </div>
+                  <span class="table-percent">0%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>ECF 2025</td>
+              <td><span class="badge badge-fluxo">Fluxo</span></td>
+              <td>20</td>
+              <td>15</td>
+              <td>6</td>
+              <td>4</td>
+              <td>5</td>
+              <td>1</td>
+              <td>1</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 25%;"></div>
+                  </div>
+                  <span class="table-percent">25%</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Balancete Jan/2026</td>
+              <td><span class="badge badge-recorrente">Recorrente</span></td>
+              <td>18</td>
+              <td>10</td>
+              <td>0</td>
+              <td>0</td>
+              <td>8</td>
+              <td>0</td>
+              <td>0</td>
+              <td>
+                <div class="table-progress">
+                  <div class="table-track">
+                    <div class="table-fill" style="width: 44%;"></div>
+                  </div>
+                  <span class="table-percent">44%</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align: center; padding: 40px; color: #999; font-size: 12px;">
+    Mockup HTML para referência Figma | Frame: "Visão Geral - Dashboard"
+  </div>
+</body>
+</html>
