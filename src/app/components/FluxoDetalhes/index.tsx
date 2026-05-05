@@ -51,20 +51,32 @@ const saveFluxo = async (fluxo: Fluxo): Promise<Fluxo> => {
 const validateFluxo = (fluxo: Fluxo): string[] => {
   const errors: string[] = [];
 
-  if (!fluxo.nome.trim()) {
-    errors.push('Nome do fluxo é obrigatório');
+  if (!fluxo.nome?.trim()) {
+    errors.push('Nome é obrigatório');
   }
 
   if (fluxo.tipo === 'recorrente') {
-    if (!fluxo.metaTarefa) {
-      errors.push('Meta das tarefas é obrigatória para fluxos recorrentes');
-    }
     if (!fluxo.frequencia) {
       errors.push('Frequência é obrigatória para fluxos recorrentes');
     }
-    if (fluxo.diaInicio === undefined) {
-      errors.push('Dia de início é obrigatório para fluxos recorrentes');
+    if (!fluxo.metaTarefa) {
+      errors.push('Meta das tarefas é obrigatória para fluxos recorrentes');
     }
+    if (fluxo.frequencia !== 'semanal' && !fluxo.diaInicio) {
+      errors.push('Dia de início é obrigatório');
+    }
+    if (fluxo.frequencia === 'semanal' && !fluxo.diaSemana) {
+      errors.push('Dia da semana é obrigatório');
+    }
+  }
+
+  if (fluxo.etapas.length === 0) {
+    errors.push('Adicione ao menos uma etapa');
+  }
+
+  const etapasSemNome = fluxo.etapas.filter(e => !e.nome?.trim());
+  if (etapasSemNome.length > 0) {
+    errors.push(`${etapasSemNome.length} etapa(s) sem nome`);
   }
 
   return errors;
@@ -112,6 +124,15 @@ const FluxoDetalhes: React.FC = () => {
   }, [isDirty]);
 
   const handleFluxoChange = (updatedFluxo: Fluxo) => {
+    // Se mudou de recorrente para esporádico e está numa aba exclusiva de recorrente
+    if (
+      fluxoData.tipo === 'recorrente' &&
+      updatedFluxo.tipo === 'esporadico' &&
+      (activeTab === 'clientes' || activeTab === 'geracao')
+    ) {
+      setActiveTab('detalhes');
+    }
+
     setFluxoData(updatedFluxo);
     setIsDirty(true);
   };
