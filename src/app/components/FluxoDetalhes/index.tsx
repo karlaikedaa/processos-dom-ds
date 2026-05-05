@@ -6,6 +6,7 @@ import { FluxoTabs } from './FluxoTabs';
 import { DetalhesTab } from './tabs/DetalhesTab';
 import { EtapasTab } from './tabs/EtapasTab';
 import { ClientesTab } from './tabs/ClientesTab';
+import { GeracaoTab } from './tabs/GeracaoTab';
 import { toast } from 'sonner';
 
 // Mock API functions
@@ -204,9 +205,12 @@ const FluxoDetalhes: React.FC = () => {
           )}
 
           {activeTab === 'geracao' && fluxoData.tipo === 'recorrente' && (
-            <div className="bg-white rounded-lg p-6">
-              <p className="text-gray-500">Geração tab - a implementar</p>
-            </div>
+            <GeracaoTab
+              mesInicio={fluxoData.mesInicio || new Date().getMonth() + 1}
+              anoInicio={fluxoData.anoInicio || new Date().getFullYear()}
+              onMesChange={(mes) => handleFluxoChange({ ...fluxoData, mesInicio: mes })}
+              onAnoChange={(ano) => handleFluxoChange({ ...fluxoData, anoInicio: ano })}
+            />
           )}
         </div>
       </div>
