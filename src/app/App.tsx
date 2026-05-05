@@ -25,9 +25,10 @@ import { GerenciarTarefas } from './components/GerenciarTarefas';
 import { GeradorTarefas } from './components/GeradorTarefas';
 import { Apontar } from './components/Apontar';
 import { FluxosDeTarefaLista } from './components/FluxosDeTarefaLista';
+import FluxoDetalhes from './components/FluxoDetalhes';
 import { TimerProvider } from './contexts/TimerContext';
 import { FloatingTimer } from './components/FloatingTimer';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -803,6 +804,20 @@ function ShortcutBar() {
 
 // ─── Main App ─────────────────────────────────────────────────────────────────
 
+// Mini router for fluxos since we're in transition
+function FluxosRouter() {
+  const location = useLocation();
+
+  // Check if we're on a fluxo detail/new page
+  const isDetailPage = location.pathname.includes('/configuracoes/fluxos-de-tarefa/');
+
+  if (isDetailPage) {
+    return <FluxoDetalhes />;
+  }
+
+  return <FluxosDeTarefaLista />;
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('configuracoes');
   const [showFAQ, setShowFAQ] = useState(false);
@@ -810,6 +825,16 @@ export default function App() {
   const [tarefasInitialView, setTarefasInitialView] = useState<TarefasViewTab | undefined>(undefined);
   const [tarefasInitialFilter, setTarefasInitialFilter] = useState<TarefasFilter | undefined>(undefined);
   const [innerView, setInnerView] = useState<string | null>(null);
+
+  const location = useLocation();
+
+  // Sync innerView with URL for fluxos
+  useEffect(() => {
+    if (location.pathname.startsWith('/configuracoes/fluxos-de-tarefa')) {
+      setInnerView('fluxos-tarefa');
+      setActiveTab('configuracoes');
+    }
+  }, [location.pathname]);
 
   // Close sidebar on resize to desktop
   useEffect(() => {
@@ -882,7 +907,7 @@ export default function App() {
                     ) : innerView === 'gerador-tarefas' ? (
                       <GeradorTarefas onBack={() => setInnerView(null)} />
                     ) : innerView === 'fluxos-tarefa' ? (
-                      <FluxosDeTarefaLista />
+                      <FluxosRouter />
                     ) : (
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 p-4 md:p-6" style={{ gridAutoRows: '1fr' }}>
                         <LeftAccordionCard onFAQ={() => setShowFAQ(true)} />
