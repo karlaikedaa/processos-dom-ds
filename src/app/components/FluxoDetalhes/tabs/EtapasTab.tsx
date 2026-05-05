@@ -78,15 +78,6 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
     toast.success('Configurações salvas');
   };
 
-  // Remove tarefa
-  const handleRemoveTarefa = (etapaId: string, tarefaId: string) => {
-    const updated = etapas.map(etapa =>
-      etapa.id === etapaId
-        ? { ...etapa, tarefas: etapa.tarefas.filter(t => t.id !== tarefaId) }
-        : etapa
-    );
-    onEtapasChange(updated);
-  };
 
   // Empty state
   if (etapas.length === 0) {
@@ -147,8 +138,7 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
                 onUpdate={(updates) => handleUpdateEtapa(etapa.id, updates)}
                 onDelete={() => handleDeleteEtapa(etapa.id)}
                 onAddTarefa={() => setAddTarefaEtapaId(etapa.id)}
-                onRemoveTarefa={(tarefaId) => handleRemoveTarefa(etapa.id, tarefaId)}
-                onConfig={() => setConfigEtapaId(etapa.id)}
+                onConfigEtapa={() => setConfigEtapaId(etapa.id)}
               />
             ))}
             {/* Placeholder add column */}
@@ -184,6 +174,7 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
       {/* Add Tarefa Modal */}
       {addTarefaEtapaId && (
         <AddTarefaModal
+          open={true}
           onClose={() => setAddTarefaEtapaId(null)}
           onAdd={(tarefa) => handleAddTarefa(addTarefaEtapaId, tarefa)}
         />
@@ -194,7 +185,8 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
         const etapa = etapas.find(e => e.id === configEtapaId);
         return etapa ? (
           <ConfigEtapaModal
-            etapa={etapa}
+            open={true}
+            config={etapa.configuracoes}
             onClose={() => setConfigEtapaId(null)}
             onSave={(config) => handleSaveConfig(configEtapaId, config)}
           />
