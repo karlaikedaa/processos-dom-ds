@@ -5,6 +5,7 @@ import { FluxoHeader } from './FluxoHeader';
 import { FluxoTabs } from './FluxoTabs';
 import { DetalhesTab } from './tabs/DetalhesTab';
 import { EtapasTab } from './tabs/EtapasTab';
+import { ClientesTab } from './tabs/ClientesTab';
 import { toast } from 'sonner';
 
 // Mock API functions
@@ -196,9 +197,10 @@ const FluxoDetalhes: React.FC = () => {
           )}
 
           {activeTab === 'clientes' && fluxoData.tipo === 'recorrente' && (
-            <div className="bg-white rounded-lg p-6">
-              <p className="text-gray-500">Clientes tab - a implementar</p>
-            </div>
+            <ClientesTab
+              clientesSelecionados={fluxoData.clientesSelecionados || []}
+              onClientesChange={(clientes) => handleFluxoChange({ ...fluxoData, clientesSelecionados: clientes })}
+            />
           )}
 
           {activeTab === 'geracao' && fluxoData.tipo === 'recorrente' && (
