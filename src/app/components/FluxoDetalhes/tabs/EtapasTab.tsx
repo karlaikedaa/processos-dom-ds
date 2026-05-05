@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
+import { toast } from 'sonner';
 import { Etapa, TarefaEtapa, ConfigEtapa } from '../../../types/fluxo';
 import { EtapaColumn } from '../components/EtapaColumn';
 import { AddTarefaModal } from '../components/AddTarefaModal';
@@ -38,13 +39,19 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
 
   // Delete etapa and renumber
   const handleDeleteEtapa = (etapaId: string) => {
+    const etapa = etapas.find(e => e.id === etapaId);
+
+    if (etapa && etapa.tarefas.length > 0) {
+      if (!confirm(`A etapa "${etapa.nome || 'Sem nome'}" possui ${etapa.tarefas.length} tarefa(s). Deseja excluir?`)) {
+        return;
+      }
+    }
+
+    // Remove and renumber
     const filtered = etapas.filter(e => e.id !== etapaId);
-    const renumbered = filtered.map((etapa, index) => ({
-      ...etapa,
-      ordem: index + 1,
-      nome: etapa.nome.replace(/Etapa \d+/, `Etapa ${index + 1}`)
-    }));
+    const renumbered = filtered.map((e, index) => ({ ...e, ordem: index + 1 }));
     onEtapasChange(renumbered);
+    toast.success('Etapa excluída com sucesso');
   };
 
   // Add tarefa to etapa
@@ -56,6 +63,7 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
     );
     onEtapasChange(updated);
     setAddTarefaEtapaId(null);
+    toast.success('Tarefa adicionada com sucesso');
   };
 
   // Save etapa config
@@ -67,6 +75,7 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
     );
     onEtapasChange(updated);
     setConfigEtapaId(null);
+    toast.success('Configurações salvas');
   };
 
   // Remove tarefa
@@ -111,9 +120,14 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
       <div className="bg-white rounded-lg border border-gray-200">
         {/* Header with add button */}
         <div className="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">
-            Etapas do Fluxo
-          </h2>
+          <div>
+            <h3 style={{ fontSize: '16px', fontWeight: '600', margin: 0 }}>
+              Etapas do fluxo
+            </h3>
+            <p style={{ fontSize: '13px', color: '#666', margin: '4px 0 0 0' }}>
+              Configure as etapas e tarefas deste fluxo
+            </p>
+          </div>
           <button
             onClick={handleAddEtapa}
             className="inline-flex items-center px-3 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
@@ -137,6 +151,32 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
                 onConfig={() => setConfigEtapaId(etapa.id)}
               />
             ))}
+            {/* Placeholder add column */}
+            {etapas.length > 0 && (
+              <div
+                onClick={handleAddEtapa}
+                style={{
+                  minWidth: '280px',
+                  background: 'transparent',
+                  border: '2px dashed #ccc',
+                  borderRadius: '8px',
+                  padding: '60px 40px',
+                  flexShrink: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#999',
+                  fontSize: '14px',
+                  cursor: 'pointer',
+                  textAlign: 'center'
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: '32px', marginBottom: '8px' }}>+</div>
+                  <div>Adicionar nova etapa</div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -150,13 +190,16 @@ export const EtapasTab: React.FC<EtapasTabProps> = ({ etapas, onEtapasChange }) 
       )}
 
       {/* Config Etapa Modal */}
-      {configEtapaId && (
-        <ConfigEtapaModal
-          etapa={etapas.find(e => e.id === configEtapaId)!}
-          onClose={() => setConfigEtapaId(null)}
-          onSave={(config) => handleSaveConfig(configEtapaId, config)}
-        />
-      )}
+      {configEtapaId && (() => {
+        const etapa = etapas.find(e => e.id === configEtapaId);
+        return etapa ? (
+          <ConfigEtapaModal
+            etapa={etapa}
+            onClose={() => setConfigEtapaId(null)}
+            onSave={(config) => handleSaveConfig(configEtapaId, config)}
+          />
+        ) : null;
+      })()}
     </>
   );
 };
