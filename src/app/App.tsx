@@ -24,6 +24,7 @@ import { ModelosDocumento } from './components/ModelosDocumento';
 import { GerenciarTarefas } from './components/GerenciarTarefas';
 import { GeradorTarefas } from './components/GeradorTarefas';
 import { Apontar } from './components/Apontar';
+import { FluxosDeTarefaLista } from './components/FluxosDeTarefaLista';
 import { TimerProvider } from './contexts/TimerContext';
 import { FloatingTimer } from './components/FloatingTimer';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
@@ -880,6 +881,8 @@ export default function App() {
                       <GerenciarTarefas onBack={() => setInnerView(null)} />
                     ) : innerView === 'gerador-tarefas' ? (
                       <GeradorTarefas onBack={() => setInnerView(null)} />
+                    ) : innerView === 'fluxos-tarefa' ? (
+                      <FluxosDeTarefaLista />
                     ) : (
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 p-4 md:p-6" style={{ gridAutoRows: '1fr' }}>
                         <LeftAccordionCard onFAQ={() => setShowFAQ(true)} />
@@ -897,6 +900,7 @@ export default function App() {
                           else if (label.includes('Modelos de documentos') || label.includes('documentos')) setInnerView('modelos-documento');
                           else if (label.includes('Gerenciar') || label.includes('gerenciar')) setInnerView('gerenciar-tarefas');
                           else if (label.includes('Gerador') || label.includes('gerador')) setInnerView('gerador-tarefas');
+                          else if (label.includes('Fluxos') || label.includes('fluxos')) setInnerView('fluxos-tarefa');
                         }} />
                         <VideoCard />
                       </div>
