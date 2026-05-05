@@ -50,10 +50,6 @@ export function GeracaoTab({ mesInicio, anoInicio, onMesChange, onAnoChange }: G
 
       {/* Período de geração */}
       <div style={{ marginBottom: '24px' }}>
-        <Label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '12px' }}>
-          Período de geração do workflow
-        </Label>
-
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
           {/* Mês */}
           <div>
