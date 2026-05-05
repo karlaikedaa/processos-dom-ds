@@ -4,6 +4,7 @@ import { Fluxo, createEmptyFluxo, TipoFluxo } from '../../types/fluxo';
 import { FluxoHeader } from './FluxoHeader';
 import { FluxoTabs } from './FluxoTabs';
 import { DetalhesTab } from './tabs/DetalhesTab';
+import { EtapasTab } from './tabs/EtapasTab';
 import { toast } from 'sonner';
 
 // Mock API functions
@@ -188,9 +189,10 @@ const FluxoDetalhes: React.FC = () => {
           )}
 
           {activeTab === 'etapas' && (
-            <div className="bg-white rounded-lg p-6">
-              <p className="text-gray-500">Etapas tab - a implementar</p>
-            </div>
+            <EtapasTab
+              etapas={fluxoData.etapas}
+              onEtapasChange={(etapas) => handleFluxoChange({ ...fluxoData, etapas })}
+            />
           )}
 
           {activeTab === 'clientes' && fluxoData.tipo === 'recorrente' && (
