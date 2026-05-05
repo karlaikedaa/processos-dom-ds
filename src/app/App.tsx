@@ -26,6 +26,7 @@ import { GeradorTarefas } from './components/GeradorTarefas';
 import { Apontar } from './components/Apontar';
 import { TimerProvider } from './contexts/TimerContext';
 import { FloatingTimer } from './components/FloatingTimer';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -823,116 +824,118 @@ export default function App() {
   }
 
   return (
-    <TimerProvider>
-      <div className="flex flex-col" style={{ width: '100vw', height: '100vh', background: 'var(--background)', overflow: 'hidden' }}>
+    <BrowserRouter>
+      <TimerProvider>
+        <div className="flex flex-col" style={{ width: '100vw', height: '100vh', background: 'var(--background)', overflow: 'hidden' }}>
 
-      {/* Product Header */}
-      <div
-        className="shrink-0 relative"
-        style={{ height: '60px', borderTop: '4px solid var(--primary)', zIndex: 20 }}
-      >
-        <Navbar onMenuToggle={() => setSidebarOpen(prev => !prev)} />
-      </div>
+          {/* Product Header */}
+          <div
+            className="shrink-0 relative"
+            style={{ height: '60px', borderTop: '4px solid var(--primary)', zIndex: 20 }}
+          >
+            <Navbar onMenuToggle={() => setSidebarOpen(prev => !prev)} />
+          </div>
 
-      {/* Body */}
-      <div className="flex flex-1 min-h-0 overflow-hidden relative">
-        {/* Sidebar */}
-        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+          {/* Body */}
+          <div className="flex flex-1 min-h-0 overflow-hidden relative">
+            {/* Sidebar */}
+            <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-        {/* Main content + ShortcutBar */}
-        <div className="flex flex-1 min-w-0 overflow-hidden">
-          {/* Main content */}
-          <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-            {/* Tab Menu */}
-            <TabMenu
-              active={activeTab}
-              onChange={(t) => setActiveTab(t)}
-            />
+            {/* Main content + ShortcutBar */}
+            <div className="flex flex-1 min-w-0 overflow-hidden">
+              {/* Main content */}
+              <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+                {/* Tab Menu */}
+                <TabMenu
+                  active={activeTab}
+                  onChange={(t) => setActiveTab(t)}
+                />
 
-            {/* Content area */}
-            <div className="flex-1 overflow-auto" style={{ background: colors.neutral['background 01'] }}>
-              {activeTab === 'configuracoes' ? (
-                innerView === 'funcionarios' ? (
-                  <FuncionariosEscritorio onBack={() => setInnerView(null)} />
-                ) : innerView === 'feriados' ? (
-                  <FeriadosHorarios onBack={() => setInnerView(null)} />
-                ) : innerView === 'responsabilidades' ? (
-                  <Responsabilidades onBack={() => setInnerView(null)} />
-                ) : innerView === 'agrupadores' ? (
-                  <AgrupadorTarefasClientes onBack={() => setInnerView(null)} />
-                ) : innerView === 'empresas' ? (
-                  <Empresas onBack={() => setInnerView(null)} />
-                ) : innerView === 'usuarios-cliente' ? (
-                  <UsuariosCliente onBack={() => setInnerView(null)} />
-                ) : innerView === 'adequacao-agrupadores' ? (
-                  <AdequacaoAgrupadores onBack={() => setInnerView(null)} />
-                ) : innerView === 'inbox' ? (
-                  <InboxConfig onBack={() => setInnerView(null)} />
-                ) : innerView === 'personalizar-assinatura' ? (
-                  <PersonalizarAssinatura onBack={() => setInnerView(null)} />
-                ) : innerView === 'templates-email' ? (
-                  <TemplatesEmailWhatsapp onBack={() => setInnerView(null)} />
-                ) : innerView === 'modelos-documento' ? (
-                  <ModelosDocumento onBack={() => setInnerView(null)} />
-                ) : innerView === 'gerenciar-tarefas' ? (
-                  <GerenciarTarefas onBack={() => setInnerView(null)} />
-                ) : innerView === 'gerador-tarefas' ? (
-                  <GeradorTarefas onBack={() => setInnerView(null)} />
-                ) : (
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 p-4 md:p-6" style={{ gridAutoRows: '1fr' }}>
-                    <LeftAccordionCard onFAQ={() => setShowFAQ(true)} />
-                    <RightPanel onCardClick={(label) => {
-                      if (label.includes('Funcionários')) setInnerView('funcionarios');
-                      else if (label.includes('Feriados') || label.includes('horários')) setInnerView('feriados');
-                      else if (label.includes('Responsabilidades')) setInnerView('responsabilidades');
-                      else if (label.includes('Agrupadores') || label.includes('agrupadores')) setInnerView('agrupadores');
-                      else if (label.includes('Empresas') || label.includes('empresas')) setInnerView('empresas');
-                      else if (label.includes('Usuários') || label.includes('usuários')) setInnerView('usuarios-cliente');
-                      else if (label.includes('Adequação') || label.includes('adequação')) setInnerView('adequacao-agrupadores');
-                      else if (label.includes('Inbox') || label.includes('inbox')) setInnerView('inbox');
-                      else if (label.includes('assinatura') || label.includes('Personalizar')) setInnerView('personalizar-assinatura');
-                      else if (label.includes('Modelos') || label.includes('WhatsApp')) setInnerView('templates-email');
-                      else if (label.includes('Modelos de documentos') || label.includes('documentos')) setInnerView('modelos-documento');
-                      else if (label.includes('Gerenciar') || label.includes('gerenciar')) setInnerView('gerenciar-tarefas');
-                      else if (label.includes('Gerador') || label.includes('gerador')) setInnerView('gerador-tarefas');
-                    }} />
-                    <VideoCard />
-                  </div>
-                )
-              ) : activeTab === 'visao-geral' ? (
-                <VisaoGeral onNavigateTarefas={handleNavigateTarefas} />
-              ) : activeTab === 'tarefas' ? (
-                <Tarefas initialView={tarefasInitialView} initialFilter={tarefasInitialFilter} />
-              ) : activeTab === 'auditoria' ? (
-                <Auditoria />
-              ) : activeTab === 'circular' ? (
-                <Circular />
-              ) : activeTab === 'relatorios' ? (
-                <Relatorios />
-              ) : activeTab === 'status-integracao' ? (
-                <StatusIntegracao />
-              ) : activeTab === 'documentos-express' ? (
-                <DocumentosExpress />
-              ) : (
-                <div className="flex items-center justify-center h-full p-6">
-                  <p style={{ color: 'var(--muted-foreground)', fontSize: 'var(--text-base)', textAlign: 'center' }}>
-                    Conteúdo de{' '}
-                    <strong>{tabs.find((t) => t.id === activeTab)?.label}</strong> em breve.
-                  </p>
+                {/* Content area */}
+                <div className="flex-1 overflow-auto" style={{ background: colors.neutral['background 01'] }}>
+                  {activeTab === 'configuracoes' ? (
+                    innerView === 'funcionarios' ? (
+                      <FuncionariosEscritorio onBack={() => setInnerView(null)} />
+                    ) : innerView === 'feriados' ? (
+                      <FeriadosHorarios onBack={() => setInnerView(null)} />
+                    ) : innerView === 'responsabilidades' ? (
+                      <Responsabilidades onBack={() => setInnerView(null)} />
+                    ) : innerView === 'agrupadores' ? (
+                      <AgrupadorTarefasClientes onBack={() => setInnerView(null)} />
+                    ) : innerView === 'empresas' ? (
+                      <Empresas onBack={() => setInnerView(null)} />
+                    ) : innerView === 'usuarios-cliente' ? (
+                      <UsuariosCliente onBack={() => setInnerView(null)} />
+                    ) : innerView === 'adequacao-agrupadores' ? (
+                      <AdequacaoAgrupadores onBack={() => setInnerView(null)} />
+                    ) : innerView === 'inbox' ? (
+                      <InboxConfig onBack={() => setInnerView(null)} />
+                    ) : innerView === 'personalizar-assinatura' ? (
+                      <PersonalizarAssinatura onBack={() => setInnerView(null)} />
+                    ) : innerView === 'templates-email' ? (
+                      <TemplatesEmailWhatsapp onBack={() => setInnerView(null)} />
+                    ) : innerView === 'modelos-documento' ? (
+                      <ModelosDocumento onBack={() => setInnerView(null)} />
+                    ) : innerView === 'gerenciar-tarefas' ? (
+                      <GerenciarTarefas onBack={() => setInnerView(null)} />
+                    ) : innerView === 'gerador-tarefas' ? (
+                      <GeradorTarefas onBack={() => setInnerView(null)} />
+                    ) : (
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 p-4 md:p-6" style={{ gridAutoRows: '1fr' }}>
+                        <LeftAccordionCard onFAQ={() => setShowFAQ(true)} />
+                        <RightPanel onCardClick={(label) => {
+                          if (label.includes('Funcionários')) setInnerView('funcionarios');
+                          else if (label.includes('Feriados') || label.includes('horários')) setInnerView('feriados');
+                          else if (label.includes('Responsabilidades')) setInnerView('responsabilidades');
+                          else if (label.includes('Agrupadores') || label.includes('agrupadores')) setInnerView('agrupadores');
+                          else if (label.includes('Empresas') || label.includes('empresas')) setInnerView('empresas');
+                          else if (label.includes('Usuários') || label.includes('usuários')) setInnerView('usuarios-cliente');
+                          else if (label.includes('Adequação') || label.includes('adequação')) setInnerView('adequacao-agrupadores');
+                          else if (label.includes('Inbox') || label.includes('inbox')) setInnerView('inbox');
+                          else if (label.includes('assinatura') || label.includes('Personalizar')) setInnerView('personalizar-assinatura');
+                          else if (label.includes('Modelos') || label.includes('WhatsApp')) setInnerView('templates-email');
+                          else if (label.includes('Modelos de documentos') || label.includes('documentos')) setInnerView('modelos-documento');
+                          else if (label.includes('Gerenciar') || label.includes('gerenciar')) setInnerView('gerenciar-tarefas');
+                          else if (label.includes('Gerador') || label.includes('gerador')) setInnerView('gerador-tarefas');
+                        }} />
+                        <VideoCard />
+                      </div>
+                    )
+                  ) : activeTab === 'visao-geral' ? (
+                    <VisaoGeral onNavigateTarefas={handleNavigateTarefas} />
+                  ) : activeTab === 'tarefas' ? (
+                    <Tarefas initialView={tarefasInitialView} initialFilter={tarefasInitialFilter} />
+                  ) : activeTab === 'auditoria' ? (
+                    <Auditoria />
+                  ) : activeTab === 'circular' ? (
+                    <Circular />
+                  ) : activeTab === 'relatorios' ? (
+                    <Relatorios />
+                  ) : activeTab === 'status-integracao' ? (
+                    <StatusIntegracao />
+                  ) : activeTab === 'documentos-express' ? (
+                    <DocumentosExpress />
+                  ) : (
+                    <div className="flex items-center justify-center h-full p-6">
+                      <p style={{ color: 'var(--muted-foreground)', fontSize: 'var(--text-base)', textAlign: 'center' }}>
+                        Conteúdo de{' '}
+                        <strong>{tabs.find((t) => t.id === activeTab)?.label}</strong> em breve.
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
+
+              {/* Shortcut Bar */}
+              <ShortcutBar />
             </div>
           </div>
 
-          {/* Shortcut Bar */}
-          <ShortcutBar />
+          {/* FAQ Side Drawer */}
+          <FAQDrawer open={showFAQ} onClose={() => setShowFAQ(false)} />
         </div>
-      </div>
-
-      {/* FAQ Side Drawer */}
-      <FAQDrawer open={showFAQ} onClose={() => setShowFAQ(false)} />
-      </div>
-      <FloatingTimer />
-    </TimerProvider>
+        <FloatingTimer />
+      </TimerProvider>
+    </BrowserRouter>
   );
 }
