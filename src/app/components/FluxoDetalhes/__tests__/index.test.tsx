@@ -5,7 +5,7 @@ import FluxoDetalhes from '../index';
 
 // Mock child components
 vi.mock('../FluxoHeader', () => ({
-  default: ({ fluxoNome, onSave, onCancel }: any) => (
+  FluxoHeader: ({ fluxoNome, onSave, onCancel }: any) => (
     <div data-testid="fluxo-header">
       <span>{fluxoNome || 'Novo fluxo'}</span>
       <button onClick={onSave}>Salvar</button>
@@ -15,7 +15,7 @@ vi.mock('../FluxoHeader', () => ({
 }));
 
 vi.mock('../FluxoTabs', () => ({
-  default: ({ activeTab, onTabChange, tipoFluxo }: any) => (
+  FluxoTabs: ({ activeTab, onTabChange, tipoFluxo }: any) => (
     <div data-testid="fluxo-tabs">
       <button onClick={() => onTabChange('detalhes')}>Detalhes</button>
       {tipoFluxo === 'recorrente' && (
@@ -29,7 +29,7 @@ vi.mock('../FluxoTabs', () => ({
 }));
 
 vi.mock('../tabs/DetalhesTab', () => ({
-  default: ({ fluxo, onChange }: any) => (
+  DetalhesTab: ({ fluxo, onChange }: any) => (
     <div data-testid="detalhes-tab">
       <input
         value={fluxo.nome}
